@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Arithmony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory:     #F5F2EC;
+    --white:     #FDFCFA;
+    --navy:      #0D1B3E;
+    --navy-mid:  #1A2F5A;
+    --navy-lt:   #2C4380;
+    --emerald:   #00A878;
+    --emerald-lt:#00C994;
+    --gold:      #C9A84C;
+    --warm-gray: #8A8070;
+    --body-text: #1C1814;
+    --rule:      rgba(13,27,62,0.1);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'Josefin Sans', sans-serif;
+    --font-mono:    'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--body-text);
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 17px;
+  }
+
+  /* ── NAV ── */
+  .topbar {
+    background: var(--navy);
+    padding: 20px clamp(24px, 6vw, 100px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,168,120,0.12);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-wordmark {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 300;
+    letter-spacing: 0.12em; color: var(--white);
+  }
+  .nav-wordmark span { color: var(--emerald); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(245,242,236,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover, .nav-link.active { color: var(--emerald); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 100px clamp(24px, 8vw, 140px) 80px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,168,120,0.1);
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 740px; }
+
+  .eyebrow {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .eyebrow-line { width: 32px; height: 1px; background: var(--emerald); opacity: 0.5; }
+  .eyebrow-text {
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--emerald);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 7vw, 88px);
+    font-weight: 300; letter-spacing: 0.02em;
+    color: var(--white); line-height: 0.95;
+    margin-bottom: 32px;
+  }
+  .hero-title em { color: var(--emerald); font-style: italic; display: block; }
+
+  .hero-sub {
+    font-family: var(--font-display);
+    font-size: clamp(17px, 2vw, 21px);
+    font-weight: 300; font-style: italic;
+    color: rgba(245,242,236,0.5);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .hero-meta {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.15em;
+    color: rgba(245,242,236,0.2);
+    margin-top: 44px;
+    display: flex; gap: 36px; flex-wrap: wrap;
+  }
+  .hero-meta strong { color: rgba(245,242,236,0.5); font-weight: 400; }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 96px clamp(24px, 8vw, 140px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .section:last-of-type { border-bottom: none; }
+
+  .section-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--emerald);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 36px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--emerald); opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4.5vw, 56px);
+    font-weight: 300; letter-spacing: 0.02em;
+    line-height: 1.05;
+    color: var(--navy);
+    margin-bottom: 32px;
+  }
+  .section-title em { color: var(--emerald); font-style: italic; }
+
+  /* ── MISSION SECTION ── */
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    max-width: 1100px;
+  }
+
+  .mission-body p {
+    color: #3A3530;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .mission-body p:last-child { margin-bottom: 0; }
+
+  .mission-body strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .mission-aside {
+    position: relative;
+    padding-top: 12px;
+  }
+
+  .principle-list { list-style: none; }
+  .principle-item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .principle-item:first-child { border-top: 1px solid var(--rule); }
+
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.2em;
+    color: var(--emerald);
+    padding-top: 4px;
+  }
+
+  .principle-name {
+    font-family: var(--font-sans);
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .principle-desc {
+    font-family: var(--font-display);
+    font-size: 15px; font-style: italic;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  /* ── PROBLEM SECTION ── */
+  .problem-section { background: var(--ivory); }
+
+  .problem-pull {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 300; font-style: italic;
+    color: var(--navy);
+    line-height: 1.4;
+    max-width: 800px;
+    border-left: 2px solid var(--emerald);
+    padding-left: 32px;
+    margin-bottom: 52px;
+  }
+
+  .problem-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    max-width: 1100px;
+  }
+  .problem-col {
+    background: var(--ivory);
+    padding: 40px 32px;
+  }
+  .problem-col-label {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    margin-bottom: 16px;
+  }
+  .problem-col-head {
+    font-family: var(--font-display);
+    font-size: 24px; font-weight: 300;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .problem-col-head em { font-style: italic; color: var(--emerald); }
+  .problem-col p {
+    font-size: 15px; line-height: 1.75;
+    color: #5C5448;
+  }
+
+  /* ── HOW IT WORKS SECTION ── */
+  .how-section { background: var(--white); }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: 1100px;
+    margin-top: 56px;
+    border: 1px solid var(--rule);
+  }
+  .step {
+    padding: 40px 28px 36px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+
+  .step-number {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.2em;
+    color: rgba(0,168,120,0.4);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .step-number::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--rule);
+  }
+
+  .step-icon {
+    width: 40px; height: 40px;
+    margin-bottom: 20px;
+  }
+
+  .step-name {
+    font-family: var(--font-sans);
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    font-family: var(--font-display);
+    font-size: 15px; font-style: italic;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+
+  /* ── VALUES SECTION ── */
+  .values-section { background: var(--navy); }
+  .values-section .section-title { color: var(--white); }
+  .values-section .section-eyebrow { opacity: 1; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(0,168,120,0.1);
+    border: 1px solid rgba(0,168,120,0.1);
+    max-width: 1100px;
+    margin-top: 52px;
+  }
+  .value-tile {
+    background: var(--navy);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .value-tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(to right, var(--emerald), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .value-tile:hover::before { opacity: 1; }
+
+  .value-num {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.25em;
+    color: rgba(0,168,120,0.4);
+    margin-bottom: 20px;
+  }
+  .value-name {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 300;
+    color: var(--white); letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+  .value-name em { color: var(--emerald); font-style: italic; }
+  .value-desc {
+    font-family: var(--font-display);
+    font-size: 16px; font-style: italic;
+    color: rgba(245,242,236,0.45);
+    line-height: 1.7;
+  }
+
+  /* ── TEAM SECTION ── */
+  .team-section { background: var(--white); }
+
+  .team-intro {
+    max-width: 640px;
+    font-size: 18px; line-height: 1.85;
+    color: #3A3530;
+    margin-bottom: 64px;
+    font-style: italic;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    max-width: 1100px;
+  }
+  .team-card {
+    background: var(--white);
+    padding: 40px 32px;
+  }
+
+  .team-avatar {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(0,168,120,0.25);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .team-avatar::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px;
+    width: 6px; height: 6px;
+    border-top: 1px solid var(--emerald);
+    border-left: 1px solid var(--emerald);
+  }
+  .team-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; right: -4px;
+    width: 6px; height: 6px;
+    border-bottom: 1px solid var(--emerald);
+    border-right: 1px solid var(--emerald);
+  }
+
+  .team-initials {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 300;
+    color: var(--emerald);
+    letter-spacing: 0.1em;
+  }
+
+  .team-name {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 300;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .team-role {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    margin-bottom: 16px;
+  }
+  .team-bio {
+    font-size: 15px; line-height: 1.75;
+    color: var(--warm-gray);
+    font-style: italic;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--navy);
+    padding: 100px clamp(24px, 8vw, 140px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .cta-content { position: relative; z-index: 1; }
+
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5.5vw, 70px);
+    font-weight: 300; letter-spacing: 0.02em;
+    color: var(--white); line-height: 1;
+    margin-bottom: 24px;
+  }
+  .cta-title em { color: var(--emerald); font-style: italic; }
+
+  .cta-sub {
+    font-family: var(--font-display);
+    font-size: 18px; font-style: italic;
+    color: rgba(245,242,236,0.45);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--emerald);
+    color: var(--navy);
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 300;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    transition: background 0.2s, gap 0.2s;
+    position: relative;
+  }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: -3px;
+    width: 8px; height: 8px;
+    border-top: 1px solid var(--emerald-lt);
+    border-left: 1px solid var(--emerald-lt);
+  }
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; right: -3px;
+    width: 8px; height: 8px;
+    border-bottom: 1px solid var(--emerald-lt);
+    border-right: 1px solid var(--emerald-lt);
+  }
+  .cta-btn:hover { background: var(--emerald-lt); gap: 18px; }
+  .cta-btn svg { flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    background: var(--navy);
+    padding: 28px clamp(24px, 6vw, 100px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0,168,120,0.1);
+  }
+  .footer-left {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--emerald); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .mission-grid { grid-template-columns: 1fr; gap: 48px; }
+    .problem-cols { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--rule); }
+    .step:nth-child(2n) { border-right: none; }
+    .values-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="topbar">
+  <a class="nav-logo" href="index.html">
+    <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+      <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+      <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.8" fill="none"/>
+      <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.8" stroke-linecap="square"/>
+      <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.8" stroke-linecap="square"/>
+      <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.5" stroke-linecap="square"/>
+      <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+    </svg>
+    <span class="nav-wordmark">Arith<span>mony</span></span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link active" href="arithmony-about.html">About</a>
+    <a class="nav-link" href="arithmony-privacy-policy.html">Privacy Policy</a>
+    <a class="nav-link" href="arithmony-terms-of-service.html">Terms of Service</a>
+    <a class="nav-link" href="index.html">Back to Home</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg">
+    <svg width="100%" height="100%" viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid slice" fill="none">
+      <!-- Large background diamonds -->
+      <rect x="750" y="-220" width="700" height="700" transform="rotate(45 950 140)" stroke="rgba(0,168,120,0.04)" stroke-width="1" fill="none"/>
+      <rect x="820" y="-150" width="520" height="520" transform="rotate(45 950 140)" stroke="rgba(0,168,120,0.03)" stroke-width="1" fill="none"/>
+      <!-- Corner brackets -->
+      <g stroke="rgba(0,168,120,0.12)" stroke-width="0.75">
+        <polyline points="32,80 80,80 80,32"/>
+        <polyline points="32,100 100,100 100,32"/>
+        <line x1="56" y1="32" x2="56" y2="80"/>
+        <line x1="32" y1="56" x2="80" y2="56"/>
+      </g>
+      <g stroke="rgba(0,168,120,0.08)" stroke-width="0.75">
+        <polyline points="1168,80 1120,80 1120,32"/>
+        <polyline points="1168,100 1100,100 1100,32"/>
+        <line x1="1144" y1="32" x2="1144" y2="80"/>
+        <line x1="1168" y1="56" x2="1120" y2="56"/>
+      </g>
+      <!-- Decorative line -->
+      <line x1="0" y1="340" x2="600" y2="340" stroke="rgba(0,168,120,0.06)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Our story &amp; mission</span>
+    </div>
+
+    <h1 class="hero-title">
+      Built on the belief<em>that clarity is power.</em>
+    </h1>
+
+    <p class="hero-sub">
+      Arithmony was born from a simple frustration: budgeting tools are either too rigid or too chaotic. We set out to build something different — elegant, precise, and genuinely useful.
+    </p>
+
+    <div class="hero-meta">
+      <span><strong>Founded</strong> · 2025</span>
+      <span><strong>Launching</strong> · Q3 2026</span>
+      <span><strong>Backed by</strong> · Independent</span>
+      <span><strong>Headquarters</strong> · New York, NY</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── MISSION ── -->
+<section class="section">
+  <div class="section-eyebrow">Our mission</div>
+  <div class="mission-grid">
+    <div>
+      <h2 class="section-title">Why we're<em>building this</em></h2>
+      <div class="mission-body">
+        <p>Most people don't struggle with money because they lack discipline — they struggle because their tools don't give them a clear enough picture of what's actually happening.</p>
+        <p>Arithmony applies the discipline of mathematics to personal finance. Not just numbers on a screen, but <strong>structured thinking</strong> — categories that make sense, patterns that reveal themselves, and goals that have real paths to completion.</p>
+        <p>We believe that when you can see your financial life with precision, good decisions become obvious. The math does the heavy lifting. You get the clarity.</p>
+      </div>
+    </div>
+
+    <div class="mission-aside">
+      <ul class="principle-list">
+        <li class="principle-item">
+          <span class="principle-num">01</span>
+          <div>
+            <p class="principle-name">Precision over approximation</p>
+            <p class="principle-desc">Every dollar accounted for. No rounding, no guessing, no "close enough."</p>
+          </div>
+        </li>
+        <li class="principle-item">
+          <span class="principle-num">02</span>
+          <div>
+            <p class="principle-name">Structure enables freedom</p>
+            <p class="principle-desc">The clearer your budget, the more confidently you can spend within it.</p>
+          </div>
+        </li>
+        <li class="principle-item">
+          <span class="principle-num">03</span>
+          <div>
+            <p class="principle-name">Beauty matters</p>
+            <p class="principle-desc">A tool you enjoy using is a tool you'll actually use. Design is not decoration.</p>
+          </div>
+        </li>
+        <li class="principle-item">
+          <span class="principle-num">04</span>
+          <div>
+            <p class="principle-name">Privacy by default</p>
+            <p class="principle-desc">Your financial data is yours. We never sell it, we never use it to serve you ads.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM ── -->
+<section class="section problem-section">
+  <div class="section-eyebrow">The problem we solve</div>
+  <h2 class="section-title">Finance apps have<em>a clarity problem</em></h2>
+
+  <p class="problem-pull">
+    "Spreadsheets are powerful but painful. Apps are easy but shallow. We wanted both — the rigor of a spreadsheet and the elegance of great software."
+  </p>
+
+  <div class="problem-cols">
+    <div class="problem-col">
+      <p class="problem-col-label">The status quo</p>
+      <h3 class="problem-col-head">Spreadsheets are <em>inflexible</em></h3>
+      <p>Powerful but brittle. One bad formula and everything breaks. No bank sync, no automatic categorization, and no way to share across devices without a headache.</p>
+    </div>
+    <div class="problem-col">
+      <p class="problem-col-label">The other extreme</p>
+      <h3 class="problem-col-head">Apps are <em>too passive</em></h3>
+      <p>Most budgeting apps track your spending automatically — then show you a pie chart of how you already failed. They report on your past without helping you shape your future.</p>
+    </div>
+    <div class="problem-col">
+      <p class="problem-col-label">The Arithmony way</p>
+      <h3 class="problem-col-head">Structure meets <em>simplicity</em></h3>
+      <p>We give you the rigour of a well-designed spreadsheet with the ease of a modern app. Automatic bank sync. Intentional budgeting. Real-time clarity on where you stand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section how-section">
+  <div class="section-eyebrow">How it works</div>
+  <h2 class="section-title">Four steps to<em>financial harmony</em></h2>
+
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-number">01</div>
+      <svg class="step-icon" viewBox="0 0 40 40" fill="none">
+        <rect x="4" y="4" width="32" height="32" transform="rotate(45 20 20)" stroke="#00A878" stroke-width="1" fill="none"/>
+        <line x1="10" y1="20" x2="30" y2="20" stroke="#00A878" stroke-width="1" stroke-linecap="square"/>
+        <line x1="20" y1="8" x2="20" y2="32" stroke="rgba(245,242,236,0.3)" stroke-width="1" stroke-linecap="square"/>
+      </svg>
+      <p class="step-name">Connect your accounts</p>
+      <p class="step-desc">Link your bank accounts securely via Plaid. Transactions flow in automatically — no manual entry required.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <svg class="step-icon" viewBox="0 0 40 40" fill="none">
+        <rect x="4" y="8" width="32" height="24" stroke="rgba(245,242,236,0.2)" stroke-width="1" fill="none"/>
+        <line x1="4" y1="14" x2="36" y2="14" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+        <line x1="4" y1="20" x2="36" y2="20" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+        <line x1="4" y1="26" x2="36" y2="26" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+        <rect x="12" y="14" width="12" height="6" fill="rgba(0,168,120,0.15)" stroke="#00A878" stroke-width="0.75"/>
+      </svg>
+      <p class="step-name">Structure your budget</p>
+      <p class="step-desc">Set intentional spending limits per category. See exactly how much runway you have before month's end.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <svg class="step-icon" viewBox="0 0 40 40" fill="none">
+        <polyline points="4,32 12,20 18,26 26,12 36,16" stroke="#00A878" stroke-width="1.2" stroke-linecap="square" fill="none"/>
+        <circle cx="36" cy="16" r="2.5" fill="#00A878"/>
+        <line x1="4" y1="36" x2="36" y2="36" stroke="rgba(245,242,236,0.15)" stroke-width="0.75"/>
+      </svg>
+      <p class="step-name">Track your progress</p>
+      <p class="step-desc">Watch your net worth grow with editorial-grade charts. Understand your financial trajectory at a glance.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <svg class="step-icon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="14" stroke="rgba(245,242,236,0.15)" stroke-width="1" fill="none"/>
+        <path d="M20 6 A14 14 0 0 1 34 20" stroke="#00A878" stroke-width="1.5" stroke-linecap="square" fill="none"/>
+        <line x1="20" y1="20" x2="20" y2="11" stroke="#00A878" stroke-width="1" stroke-linecap="square"/>
+        <line x1="20" y1="20" x2="27" y2="20" stroke="rgba(245,242,236,0.4)" stroke-width="1" stroke-linecap="square"/>
+        <circle cx="20" cy="20" r="2" fill="#00A878"/>
+      </svg>
+      <p class="step-name">Hit your goals</p>
+      <p class="step-desc">Set savings targets with deadlines. Arithmony calculates exactly what you need to set aside each month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── VALUES ── -->
+<section class="section values-section">
+  <div class="section-eyebrow">What we stand for</div>
+  <h2 class="section-title">Our <em>values</em></h2>
+
+  <div class="values-grid">
+    <div class="value-tile">
+      <p class="value-num">01</p>
+      <h3 class="value-name">Radical <em>transparency</em></h3>
+      <p class="value-desc">No hidden fees. No dark patterns. No upsells disguised as features. What you see is exactly what you get, and exactly what you pay for.</p>
+    </div>
+    <div class="value-tile">
+      <p class="value-num">02</p>
+      <h3 class="value-name">Earned <em>trust</em></h3>
+      <p class="value-desc">You're sharing your financial life with us. We treat that as the extraordinary responsibility it is — never selling your data, never monetizing your attention.</p>
+    </div>
+    <div class="value-tile">
+      <p class="value-num">03</p>
+      <h3 class="value-name">Deliberate <em>design</em></h3>
+      <p class="value-desc">Every pixel, every interaction, every word is considered. We believe that software made with care produces outcomes with care.</p>
+    </div>
+    <div class="value-tile">
+      <p class="value-num">04</p>
+      <h3 class="value-name">Long-term <em>thinking</em></h3>
+      <p class="value-desc">We're not optimizing for the next quarter — we're building a tool people will use for decades. That shapes every decision we make.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section class="section team-section">
+  <div class="section-eyebrow">The team</div>
+  <h2 class="section-title">Small team,<em>big vision</em></h2>
+
+  <p class="team-intro">
+    We're a small, independent team who believe the best financial tools haven't been built yet. No venture pressure, no growth-at-all-costs. Just a relentless focus on building something genuinely useful.
+  </p>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">
+        <span class="team-initials">A</span>
+      </div>
+      <p class="team-name">The Founder</p>
+      <p class="team-role">Product &amp; Vision</p>
+      <p class="team-bio">Frustrated by every budgeting app on the market and armed with a spreadsheet that had become unmaintainable. Decided to build the right tool.</p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">
+        <span class="team-initials">∑</span>
+      </div>
+      <div style="display:flex; flex-direction:column; justify-content:center; height: calc(100% - 80px);">
+        <p class="team-name" style="font-style:italic; color: var(--warm-gray); font-size:18px;">Your role here.</p>
+        <p class="team-role">We're hiring</p>
+        <p class="team-bio">We're looking for people who care deeply about design, engineering, and financial literacy. If that's you — reach out.</p>
+        <a href="mailto:hello@arithmony.com" style="display:inline-block; margin-top:16px; font-family:var(--font-mono); font-size:8px; letter-spacing:0.25em; text-transform:uppercase; color:var(--emerald); text-decoration:none; border-bottom:1px solid rgba(0,168,120,0.3); padding-bottom:2px;">hello@arithmony.com →</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">
+        <span class="team-initials">π</span>
+      </div>
+      <div style="display:flex; flex-direction:column; justify-content:center; height: calc(100% - 80px);">
+        <p class="team-name" style="font-style:italic; color: var(--warm-gray); font-size:18px;">Your role here.</p>
+        <p class="team-role">We're hiring</p>
+        <p class="team-bio">Whether you're a designer, developer, or finance nerd — if you believe software can be both beautiful and precise, we'd love to hear from you.</p>
+        <a href="mailto:hello@arithmony.com" style="display:inline-block; margin-top:16px; font-family:var(--font-mono); font-size:8px; letter-spacing:0.25em; text-transform:uppercase; color:var(--emerald); text-decoration:none; border-bottom:1px solid rgba(0,168,120,0.3); padding-bottom:2px;">hello@arithmony.com →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <div class="cta-bg">
+    <svg width="100%" height="100%" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" fill="none">
+      <rect x="400" y="-160" width="600" height="600" transform="rotate(45 600 200)" stroke="rgba(0,168,120,0.04)" stroke-width="1" fill="none"/>
+      <rect x="460" y="-100" width="450" height="450" transform="rotate(45 600 200)" stroke="rgba(0,168,120,0.025)" stroke-width="1" fill="none"/>
+      <g stroke="rgba(0,168,120,0.1)" stroke-width="0.75">
+        <polyline points="32,80 80,80 80,32"/>
+        <polyline points="32,100 100,100 100,32"/>
+      </g>
+      <g stroke="rgba(0,168,120,0.08)" stroke-width="0.75">
+        <polyline points="1168,80 1120,80 1120,32"/>
+        <polyline points="1168,100 1100,100 1100,32"/>
+      </g>
+    </svg>
+  </div>
+  <div class="cta-content">
+    <h2 class="cta-title">Ready for<em>financial harmony?</em></h2>
+    <p class="cta-sub">Join the waitlist and be the first to know when Arithmony launches.</p>
+    <a href="index.html#signupForm" class="cta-btn">
+      Get early access
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <line x1="2" y1="7" x2="12" y2="7" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+        <polyline points="8,3 12,7 8,11" stroke="currentColor" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="doc-footer">
+  <span class="footer-left">© 2026 Arithmony · All rights reserved</span>
+  <div class="footer-links">
+    <a class="footer-link" href="arithmony-about.html">About</a>
+    <a class="footer-link" href="arithmony-privacy-policy.html">Privacy Policy</a>
+    <a class="footer-link" href="arithmony-terms-of-service.html">Terms of Service</a>
+    <a class="footer-link" href="mailto:hello@arithmony.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

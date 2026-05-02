@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmony — Logo Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory:     #F5F2EC;
+    --white:     #FDFCFA;
+    --navy:      #0D1B3E;
+    --navy-mid:  #1A2F5A;
+    --navy-lt:   #2C4380;
+    --emerald:   #00A878;
+    --emerald-lt:#00C994;
+    --gold:      #C9A84C;
+    --warm-gray: #8A8070;
+    --rule:      rgba(13,27,62,0.10);
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'Josefin Sans', sans-serif;
+    --font-mono:    'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ivory);
+    color: var(--navy);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    background: var(--navy);
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .page-header-bg {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .page-header-content { position: relative; z-index: 2; }
+  .page-eyebrow {
+    font-size: 9px; font-weight: 200; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--emerald); margin-bottom: 16px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300; letter-spacing: 0.06em;
+    color: var(--white); line-height: 1;
+  }
+  .page-title em { color: var(--emerald); font-style: italic; }
+  .page-meta {
+    position: relative; z-index: 2;
+    text-align: right;
+  }
+  .page-meta p {
+    font-size: 9px; font-weight: 200; letter-spacing: 0.3em;
+    text-transform: uppercase; color: rgba(245,242,236,0.25);
+    line-height: 2;
+  }
+
+  /* ─── SECTION CHROME ─── */
+  .kit-section { padding: 72px 72px; }
+  .kit-section + .kit-section { padding-top: 0; }
+
+  .section-head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 48px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.2em; color: var(--emerald);
+  }
+  .section-name {
+    font-size: 9px; font-weight: 200; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--warm-gray);
+  }
+  .section-head-rule { flex: 1; height: 1px; background: var(--rule); }
+
+  /* ─── LOGO TILE SYSTEM ─── */
+  .logo-row {
+    display: grid;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 1px;
+  }
+  .logo-row-2  { grid-template-columns: 1fr 1fr; }
+  .logo-row-3  { grid-template-columns: 1fr 1fr 1fr; }
+  .logo-row-4  { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .logo-tile {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 56px 40px 44px;
+    position: relative; overflow: hidden;
+    min-height: 220px;
+    gap: 0;
+  }
+  .logo-tile-inner {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    flex: 1;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .logo-tile:hover .logo-tile-inner { transform: scale(1.04); }
+
+  .tile-label {
+    position: absolute; bottom: 16px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-mono); font-size: 8.5px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+  }
+  .tile-sublabel {
+    position: absolute; bottom: 6px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-display); font-size: 11px;
+    font-style: italic;
+  }
+
+  /* Tile backgrounds */
+  .bg-white   { background: var(--white); }
+  .bg-ivory   { background: var(--ivory); }
+  .bg-navy    { background: var(--navy); }
+  .bg-navymid { background: var(--navy-mid); }
+  .bg-emerald { background: var(--emerald); }
+  .bg-gold    { background: var(--gold); }
+  .bg-black   { background: #0A0A0A; }
+  .bg-ltgray  { background: #E8E4DC; }
+
+  /* Label color utilities */
+  .lc-navy   { color: rgba(13,27,62,0.35); }
+  .lc-ivory  { color: rgba(245,242,236,0.35); }
+  .lc-emerald{ color: rgba(0,168,120,0.6); }
+
+  /* ─── THE MARK SVG SYSTEM ─── */
+  /* All marks are inline SVG for crisp rendering */
+
+  /* ─── WORDMARK TYPOGRAPHY ─── */
+  .wm {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .wm-navy    { color: var(--navy); }
+  .wm-white   { color: var(--white); }
+  .wm-emerald-end { }
+  .wm-emerald-end .accent { color: var(--emerald); }
+  .wm-all-emerald { color: var(--emerald); }
+  .wm-gold    { color: var(--gold); }
+
+  /* Inline lockup (symbol + wordmark) */
+  .lockup-inline {
+    display: flex; align-items: center; gap: 0;
+  }
+
+  /* Stacked lockup */
+  .lockup-stacked {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 12px;
+  }
+  .lockup-stacked .tagline {
+    font-family: var(--font-sans);
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.45em; text-transform: uppercase;
+  }
+
+  /* ─── SIZE SCALE ROW ─── */
+  .scale-row {
+    display: flex; align-items: center;
+    gap: 48px; padding: 40px 48px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+  .scale-item {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 12px;
+  }
+  .scale-label {
+    font-family: var(--font-mono); font-size: 8px;
+    letter-spacing: 0.2em; color: var(--warm-gray);
+    text-transform: uppercase;
+  }
+
+  /* ─── CLEARSPACE DIAGRAM ─── */
+  .clearspace-wrap {
+    display: flex; align-items: center; justify-content: center;
+    padding: 64px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+  .clearspace-box {
+    position: relative;
+    border: 1.5px dashed rgba(0,168,120,0.35);
+    padding: 28px;
+    display: inline-flex;
+  }
+  .clearspace-arrow {
+    position: absolute;
+    font-family: var(--font-mono); font-size: 8px;
+    color: var(--emerald); letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .clearspace-arrow.top    { top: -24px; left: 50%; transform: translateX(-50%); }
+  .clearspace-arrow.bottom { bottom: -24px; left: 50%; transform: translateX(-50%); }
+  .clearspace-arrow.left   { left: -40px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+  .clearspace-arrow.right  { right: -40px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+  /* ─── MISUSE SECTION ─── */
+  .misuse-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  }
+  .misuse-tile {
+    background: var(--white); padding: 36px 28px 28px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px; position: relative;
+  }
+  .misuse-x {
+    position: absolute; top: 12px; right: 12px;
+    width: 18px; height: 18px;
+    background: #C0392B; border-radius: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .misuse-x::before, .misuse-x::after {
+    content: ''; position: absolute;
+    width: 10px; height: 1.5px; background: white;
+  }
+  .misuse-x::before { transform: rotate(45deg); }
+  .misuse-x::after  { transform: rotate(-45deg); }
+  .misuse-label {
+    font-family: var(--font-display); font-size: 12px;
+    font-style: italic; color: var(--warm-gray);
+    text-align: center; line-height: 1.5;
+  }
+
+  /* ─── CONTEXT / REAL-WORLD MOCKUPS ─── */
+  .mockup-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  }
+  .mockup-tile {
+    padding: 0; overflow: hidden; min-height: 280px;
+    display: flex; flex-direction: column; position: relative;
+  }
+
+  /* App icon mockup */
+  .app-icon-wrap {
+    background: var(--ivory); padding: 48px;
+    display: flex; align-items: center; justify-content: center; flex: 1;
+  }
+  .app-icon {
+    width: 120px; height: 120px; border-radius: 28px;
+    background: var(--navy); display: flex;
+    align-items: center; justify-content: center;
+    box-shadow: 0 20px 60px rgba(13,27,62,0.25), 0 4px 12px rgba(13,27,62,0.15);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(44,67,128,0.8) 0%, transparent 60%);
+  }
+
+  /* Favicon row */
+  .favicon-row {
+    display: flex; align-items: center; gap: 20px;
+    background: var(--white); padding: 40px 48px;
+    border: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+  .favicon-item {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .favicon-bg-white { background: white; padding: 4px; border: 1px solid var(--rule); }
+  .favicon-bg-dark  { background: #1a1a1a; padding: 4px; }
+  .favicon-bg-browser { background: #F1F3F4; padding: 8px 12px; border-radius: 4px;
+    display: flex; align-items: center; gap: 8px; }
+  .favicon-url-bar {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 300;
+    letter-spacing: 0.05em; color: #555;
+  }
+
+  /* Navbar mockup */
+  .navbar-mockup {
+    background: var(--white); border-bottom: 1px solid var(--rule);
+    padding: 16px 32px; display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  .navbar-links {
+    display: flex; gap: 32px;
+  }
+  .navbar-link {
+    font-family: var(--font-sans); font-size: 9px; font-weight: 200;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-gray);
+  }
+  .navbar-link.active { color: var(--navy); border-bottom: 1px solid var(--emerald); padding-bottom: 2px; }
+  .navbar-cta {
+    font-family: var(--font-sans); font-size: 9px; font-weight: 300;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--white); background: var(--navy);
+    padding: 9px 20px; border: none; cursor: pointer;
+    position: relative;
+  }
+  .navbar-cta::after {
+    content: ''; position: absolute;
+    bottom: -2px; right: -2px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--emerald);
+    pointer-events: none;
+  }
+
+  /* Email header mockup */
+  .email-header {
+    background: var(--navy); padding: 28px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .email-body-preview {
+    background: var(--white); padding: 32px 40px; flex: 1;
+  }
+  .email-tagline {
+    font-family: var(--font-sans); font-size: 8px; font-weight: 200;
+    letter-spacing: 0.35em; text-transform: uppercase; color: rgba(245,242,236,0.35);
+  }
+
+  /* ─── HORIZONTAL DIVIDER ─── */
+  .kit-rule {
+    display: flex; align-items: center; gap: 12px;
+    margin: 0 72px 0; padding: 32px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .kit-rule-diamond {
+    width: 5px; height: 5px; background: var(--emerald);
+    transform: rotate(45deg); flex-shrink: 0;
+  }
+  .kit-rule-text {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.25em; color: var(--warm-gray); text-transform: uppercase;
+  }
+
+  /* ─── ANIMATION ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .kit-section, .logo-row, .scale-row, .misuse-grid,
+  .mockup-grid, .clearspace-wrap, .favicon-row {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @media (max-width: 900px) {
+    .kit-section { padding: 48px 24px; }
+    .logo-row-3, .logo-row-4 { grid-template-columns: 1fr 1fr; }
+    .misuse-grid { grid-template-columns: 1fr 1fr; }
+    .mockup-grid { grid-template-columns: 1fr; }
+    .page-header { padding: 40px 24px 40px; flex-direction: column; align-items: flex-start; }
+    .page-meta { text-align: left; }
+  }
+  @media (max-width: 600px) {
+    .logo-row-2, .logo-row-3, .logo-row-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+  PAGE HEADER
+══════════════════════════════════════ -->
+<header class="page-header">
+  <div class="page-header-bg">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="rgba(0,168,120,0.05)" stroke-width="1" fill="none">
+        <rect x="900" y="-200" width="700" height="700" transform="rotate(45 1100 130)"/>
+        <rect x="980" y="-140" width="560" height="560" transform="rotate(45 1100 130)"/>
+        <rect x="1060" y="-80" width="420" height="420" transform="rotate(45 1100 130)"/>
+      </g>
+      <g stroke="rgba(201,168,76,0.06)" stroke-width="0.75" fill="none">
+        <polyline points="0,30 30,30 30,0"/>
+        <polyline points="0,50 50,50 50,0"/>
+        <polyline points="1440,30 1410,30 1410,0"/>
+        <polyline points="1440,50 1390,50 1390,0"/>
+      </g>
+      <line x1="0" y1="259" x2="1440" y2="259" stroke="rgba(0,168,120,0.12)" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="page-header-content">
+    <p class="page-eyebrow">Arithmony · Logo Kit · 2026</p>
+    <h1 class="page-title">Logo <em>Kit</em></h1>
+  </div>
+  <div class="page-meta">
+    <p>Primary Mark</p>
+    <p>Horizontal Lockup</p>
+    <p>Stacked Lockup</p>
+    <p>Symbol Only</p>
+    <p>Wordmark Only</p>
+    <p>Favicon / App Icon</p>
+    <p>Context &amp; Misuse</p>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════
+  01 — PRIMARY MARK (Full Lockup)
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Primary Mark — Horizontal Lockup</span>
+  </div>
+
+  <!-- Row 1: Light & Dark hero tiles -->
+  <div class="logo-row logo-row-2">
+
+    <!-- Light / Primary -->
+    <div class="logo-tile bg-white" style="min-height:300px;">
+      <div class="logo-tile-inner">
+        <!-- Horizontal lockup: symbol + wordmark -->
+        <div class="lockup-inline" style="gap:18px; align-items:center;">
+          <svg width="52" height="52" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer diamond -->
+            <rect x="5" y="5" width="54" height="54" rx="0" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+            <!-- Inner diamond -->
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+            <!-- A legs -->
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <!-- Crossbar -->
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <!-- Apex dot -->
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+            <!-- Base ticks -->
+            <line x1="14" y1="48" x2="10" y2="48" stroke="rgba(13,27,62,0.25)" stroke-width="0.9"/>
+            <line x1="50" y1="48" x2="54" y2="48" stroke="rgba(13,27,62,0.25)" stroke-width="0.9"/>
+          </svg>
+          <div>
+            <div class="wm wm-navy" style="font-size:44px;">Arith<span style="color:var(--emerald);">mony</span></div>
+          </div>
+        </div>
+      </div>
+      <span class="tile-label lc-navy">A · Primary · Light Ground</span>
+    </div>
+
+    <!-- Dark / Reversed -->
+    <div class="logo-tile bg-navy" style="min-height:300px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-inline" style="gap:18px; align-items:center;">
+          <svg width="52" height="52" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+            <line x1="14" y1="48" x2="10" y2="48" stroke="rgba(245,242,236,0.2)" stroke-width="0.9"/>
+            <line x1="50" y1="48" x2="54" y2="48" stroke="rgba(245,242,236,0.2)" stroke-width="0.9"/>
+          </svg>
+          <div>
+            <div class="wm wm-white" style="font-size:44px;">Arith<span style="color:var(--emerald);">mony</span></div>
+          </div>
+        </div>
+      </div>
+      <span class="tile-label lc-ivory">B · Reversed · Dark Ground</span>
+    </div>
+  </div>
+
+  <!-- Row 2: Emerald, Black, Ivory, Gold -->
+  <div class="logo-row logo-row-4">
+
+    <!-- Emerald ground -->
+    <div class="logo-tile bg-emerald" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-inline" style="gap:12px; align-items:center;">
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="rgba(13,27,62,0.7)" stroke-width="1.5" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(13,27,62,0.25)" stroke-width="1" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="rgba(13,27,62,0.8)" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#0D1B3E"/>
+          </svg>
+          <div class="wm" style="font-size:26px; color:#0D1B3E; letter-spacing:0.1em;">Arithmony</div>
+        </div>
+      </div>
+      <span class="tile-label" style="color:rgba(13,27,62,0.4);">C · Emerald Ground</span>
+    </div>
+
+    <!-- Black ground -->
+    <div class="logo-tile bg-black" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-inline" style="gap:12px; align-items:center;">
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.25)" stroke-width="1" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          </svg>
+          <div class="wm wm-white" style="font-size:26px; letter-spacing:0.1em;">Arithmony</div>
+        </div>
+      </div>
+      <span class="tile-label lc-ivory">D · Black Ground</span>
+    </div>
+
+    <!-- Ivory / warm -->
+    <div class="logo-tile bg-ivory" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-inline" style="gap:12px; align-items:center;">
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="1" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          </svg>
+          <div class="wm wm-navy" style="font-size:26px; letter-spacing:0.1em;">Arithmony</div>
+        </div>
+      </div>
+      <span class="tile-label lc-navy">E · Ivory Ground</span>
+    </div>
+
+    <!-- Premium / Gold frame -->
+    <div class="logo-tile bg-navy" style="min-height:200px; position:relative;">
+      <!-- Gold corner ornament -->
+      <svg style="position:absolute;top:0;left:0;opacity:0.5;" width="50" height="50" viewBox="0 0 50 50" fill="none">
+        <polyline points="0,20 20,20 20,0" stroke="#C9A84C" stroke-width="0.75" fill="none"/>
+        <polyline points="0,30 30,30 30,0" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
+      </svg>
+      <svg style="position:absolute;bottom:0;right:0;opacity:0.5;" width="50" height="50" viewBox="0 0 50 50" fill="none">
+        <polyline points="50,30 30,30 30,50" stroke="#C9A84C" stroke-width="0.75" fill="none"/>
+        <polyline points="50,20 20,20 20,50" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
+      </svg>
+      <div class="logo-tile-inner">
+        <div class="lockup-inline" style="gap:12px; align-items:center;">
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(201,168,76,0.3)" stroke-width="1" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#C9A84C"/>
+          </svg>
+          <div class="wm wm-white" style="font-size:26px; letter-spacing:0.1em;">Arith<span style="color:var(--gold);">mony</span></div>
+        </div>
+      </div>
+      <span class="tile-label lc-ivory">F · Premium / Gold Variant</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  02 — STACKED LOCKUP
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Stacked Lockup — Centered Composition</span>
+  </div>
+
+  <div class="logo-row logo-row-3">
+
+    <!-- Stacked Light -->
+    <div class="logo-tile bg-white" style="min-height:280px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-stacked">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          </svg>
+          <!-- Deco rule under mark -->
+          <svg width="80" height="6" viewBox="0 0 80 6">
+            <line x1="0" y1="3" x2="34" y2="3" stroke="rgba(13,27,62,0.15)" stroke-width="0.75"/>
+            <rect x="37" y="1" width="6" height="6" transform="rotate(45 40 4)" fill="#00A878"/>
+            <line x1="46" y1="3" x2="80" y2="3" stroke="rgba(13,27,62,0.15)" stroke-width="0.75"/>
+          </svg>
+          <div class="wm wm-navy" style="font-size:28px; text-align:center;">Arith<span style="color:var(--emerald);">mony</span></div>
+          <div class="tagline" style="color:var(--warm-gray); margin-top:-4px;">Harmony in your numbers</div>
+        </div>
+      </div>
+      <span class="tile-label lc-navy">G · Stacked · Light</span>
+    </div>
+
+    <!-- Stacked Dark -->
+    <div class="logo-tile bg-navy" style="min-height:280px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-stacked">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          </svg>
+          <svg width="80" height="6" viewBox="0 0 80 6">
+            <line x1="0" y1="3" x2="34" y2="3" stroke="rgba(245,242,236,0.15)" stroke-width="0.75"/>
+            <rect x="37" y="1" width="6" height="6" transform="rotate(45 40 4)" fill="#00A878"/>
+            <line x1="46" y1="3" x2="80" y2="3" stroke="rgba(245,242,236,0.15)" stroke-width="0.75"/>
+          </svg>
+          <div class="wm wm-white" style="font-size:28px; text-align:center;">Arith<span style="color:var(--emerald);">mony</span></div>
+          <div class="tagline" style="color:rgba(245,242,236,0.35); margin-top:-4px;">Harmony in your numbers</div>
+        </div>
+      </div>
+      <span class="tile-label lc-ivory">H · Stacked · Dark</span>
+    </div>
+
+    <!-- Stacked Ivory -->
+    <div class="logo-tile bg-ivory" style="min-height:280px;">
+      <div class="logo-tile-inner">
+        <div class="lockup-stacked">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+            <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+            <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          </svg>
+          <svg width="80" height="6" viewBox="0 0 80 6">
+            <line x1="0" y1="3" x2="34" y2="3" stroke="rgba(13,27,62,0.15)" stroke-width="0.75"/>
+            <rect x="37" y="1" width="6" height="6" transform="rotate(45 40 4)" fill="#00A878"/>
+            <line x1="46" y1="3" x2="80" y2="3" stroke="rgba(13,27,62,0.15)" stroke-width="0.75"/>
+          </svg>
+          <div class="wm wm-navy" style="font-size:28px; text-align:center;">Arith<span style="color:var(--emerald);">mony</span></div>
+          <div class="tagline" style="color:var(--warm-gray); margin-top:-4px;">Harmony in your numbers</div>
+        </div>
+      </div>
+      <span class="tile-label lc-navy">I · Stacked · Ivory</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  03 — SYMBOL MARK ONLY
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Symbol Mark — Isolated</span>
+  </div>
+
+  <div class="logo-row logo-row-4">
+
+    <div class="logo-tile bg-white" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <svg width="80" height="80" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+          <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+          <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          <line x1="14" y1="48" x2="10" y2="48" stroke="rgba(13,27,62,0.2)" stroke-width="0.9"/>
+          <line x1="50" y1="48" x2="54" y2="48" stroke="rgba(13,27,62,0.2)" stroke-width="0.9"/>
+        </svg>
+      </div>
+      <span class="tile-label lc-navy">J · Symbol · White</span>
+    </div>
+
+    <div class="logo-tile bg-navy" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <svg width="80" height="80" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.4" fill="none"/>
+          <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+          <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.4" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+          <line x1="14" y1="48" x2="10" y2="48" stroke="rgba(245,242,236,0.2)" stroke-width="0.9"/>
+          <line x1="50" y1="48" x2="54" y2="48" stroke="rgba(245,242,236,0.2)" stroke-width="0.9"/>
+        </svg>
+      </div>
+      <span class="tile-label lc-ivory">K · Symbol · Navy</span>
+    </div>
+
+    <div class="logo-tile bg-emerald" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <svg width="80" height="80" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="rgba(13,27,62,0.6)" stroke-width="1.4" fill="none"/>
+          <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(13,27,62,0.2)" stroke-width="0.9" fill="none"/>
+          <line x1="32" y1="9"  x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="32" y1="9"  x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="rgba(13,27,62,0.7)" stroke-width="1.4" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.2" fill="#0D1B3E"/>
+        </svg>
+      </div>
+      <span class="tile-label" style="color:rgba(13,27,62,0.4);">L · Symbol · Emerald</span>
+    </div>
+
+    <div class="logo-tile bg-black" style="min-height:200px;">
+      <div class="logo-tile-inner">
+        <!-- Outline/mono version for dark -->
+        <svg width="80" height="80" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="rgba(245,242,236,0.5)" stroke-width="1.4" fill="none"/>
+          <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(245,242,236,0.15)" stroke-width="0.9" fill="none"/>
+          <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.6" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="#FDFCFA" stroke-width="1.4" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.2" fill="#FDFCFA"/>
+        </svg>
+      </div>
+      <span class="tile-label lc-ivory">M · Symbol · Mono White</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  04 — WORDMARK ONLY
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Wordmark — Isolated</span>
+  </div>
+
+  <div class="logo-row logo-row-2">
+    <div class="logo-tile bg-white" style="min-height:180px;">
+      <div class="logo-tile-inner">
+        <div class="wm wm-navy" style="font-size:52px;">Arith<span style="color:var(--emerald);">mony</span></div>
+      </div>
+      <span class="tile-label lc-navy">N · Wordmark · Light</span>
+    </div>
+    <div class="logo-tile bg-navy" style="min-height:180px;">
+      <div class="logo-tile-inner">
+        <div class="wm wm-white" style="font-size:52px;">Arith<span style="color:var(--emerald);">mony</span></div>
+      </div>
+      <span class="tile-label lc-ivory">O · Wordmark · Dark</span>
+    </div>
+  </div>
+
+  <div class="logo-row logo-row-2" style="margin-top:1px;">
+    <!-- Wordmark: all-navy (formal) -->
+    <div class="logo-tile bg-ivory" style="min-height:160px;">
+      <div class="logo-tile-inner">
+        <div class="wm wm-navy" style="font-size:44px; letter-spacing:0.18em;">ARITHMONY</div>
+        <div style="font-family:var(--font-sans);font-size:8px;font-weight:200;letter-spacing:0.45em;text-transform:uppercase;color:var(--warm-gray);margin-top:10px;">All-caps variant</div>
+      </div>
+      <span class="tile-label lc-navy">P · All-Caps · Formal</span>
+    </div>
+    <!-- Wordmark: italic editorial -->
+    <div class="logo-tile bg-white" style="min-height:160px;">
+      <div class="logo-tile-inner">
+        <div style="font-family:var(--font-display); font-size:56px; font-weight:300; font-style:italic; color:var(--navy); letter-spacing:0.08em; line-height:1;">
+          Arith<span style="color:var(--emerald);">mony</span>
+        </div>
+        <div style="font-family:var(--font-sans);font-size:8px;font-weight:200;letter-spacing:0.45em;text-transform:uppercase;color:var(--warm-gray);margin-top:10px;">Italic editorial variant</div>
+      </div>
+      <span class="tile-label lc-navy">Q · Italic · Editorial</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  05 — FAVICON & APP ICON
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Favicon &amp; App Icon</span>
+  </div>
+
+  <!-- Favicon sizes -->
+  <div class="favicon-row">
+    <div style="flex:1; min-width:200px;">
+      <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--emerald);text-transform:uppercase;margin-bottom:16px;">Favicon — Browser Context</p>
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div class="favicon-item">
+          <div class="favicon-bg-browser">
+            <svg width="16" height="16" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="3" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="3" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="2.5" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3" fill="#00A878"/>
+            </svg>
+            <span class="favicon-url-bar">arithmony.com</span>
+          </div>
+          <span class="scale-label">16px</span>
+        </div>
+        <div class="favicon-item">
+          <div class="favicon-bg-white">
+            <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="3" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="3" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="2.5" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3" fill="#00A878"/>
+            </svg>
+          </div>
+          <span class="scale-label">32px</span>
+        </div>
+        <div class="favicon-item">
+          <div class="favicon-bg-dark">
+            <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="3" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="3" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="2.5" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3" fill="#00A878"/>
+            </svg>
+          </div>
+          <span class="scale-label">32px dark</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- App icon sizes -->
+    <div style="flex:1; min-width:200px;">
+      <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--emerald);text-transform:uppercase;margin-bottom:16px;">App Icon — Mobile Context</p>
+      <div style="display:flex; align-items:flex-end; gap:20px; flex-wrap:wrap;">
+
+        <!-- 60px app icon -->
+        <div class="favicon-item">
+          <div style="width:60px;height:60px;border-radius:14px;background:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(13,27,62,0.25); position:relative; overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(44,67,128,0.8) 0%, transparent 60%);"></div>
+            <svg width="36" height="36" viewBox="0 0 64 64" fill="none" style="position:relative;z-index:1;">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="3.5" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="3.5" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="3" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3.5" fill="#00A878"/>
+            </svg>
+          </div>
+          <span class="scale-label">60pt iOS</span>
+        </div>
+
+        <!-- 76px app icon -->
+        <div class="favicon-item">
+          <div style="width:76px;height:76px;border-radius:18px;background:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(13,27,62,0.3); position:relative; overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(44,67,128,0.8) 0%, transparent 60%);"></div>
+            <svg width="46" height="46" viewBox="0 0 64 64" fill="none" style="position:relative;z-index:1;">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="3.5" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="3.5" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="3" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3.5" fill="#00A878"/>
+            </svg>
+          </div>
+          <span class="scale-label">76pt iPad</span>
+        </div>
+
+        <!-- 120px app icon -->
+        <div class="favicon-item">
+          <div style="width:120px;height:120px;border-radius:28px;background:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(13,27,62,0.35); position:relative; overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(44,67,128,0.9) 0%, transparent 55%);"></div>
+            <!-- Subtle geo texture in icon -->
+            <svg style="position:absolute;inset:0;opacity:0.07;" width="120" height="120" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="0.5" fill="none"/>
+              <rect x="14" y="14" width="36" height="36" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="0.5" fill="none"/>
+            </svg>
+            <svg width="72" height="72" viewBox="0 0 64 64" fill="none" style="position:relative;z-index:1;">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+              <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.25)" stroke-width="0.8" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="2.8" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="2.8" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="2.5" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3" fill="#00A878"/>
+            </svg>
+          </div>
+          <span class="scale-label">120pt @2x</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  06 — SIZE SCALE & CLEAR SPACE
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Size Scale &amp; Clear Space</span>
+  </div>
+
+  <!-- Size scale -->
+  <div class="scale-row" style="margin-bottom:1px;">
+    <div style="flex:1; min-width:100px;">
+      <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--emerald);text-transform:uppercase;margin-bottom:20px;">Horizontal lockup at scale</p>
+      <div style="display:flex; align-items:center; gap:40px; flex-wrap:wrap;">
+
+        <div class="scale-item">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <svg width="12" height="12" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="4" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="4" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="3" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="4" fill="#00A878"/>
+            </svg>
+            <span class="wm wm-navy" style="font-size:12px;">Arithmony</span>
+          </div>
+          <span class="scale-label">16px min</span>
+        </div>
+
+        <div class="scale-item">
+          <div style="display:flex;align-items:center;gap:7px;">
+            <svg width="18" height="18" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="2" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="3" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="3" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="2.5" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3" fill="#00A878"/>
+            </svg>
+            <span class="wm wm-navy" style="font-size:18px;">Arithmony</span>
+          </div>
+          <span class="scale-label">24px</span>
+        </div>
+
+        <div class="scale-item">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.8" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="2.5" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="2.5" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="2" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="3" fill="#00A878"/>
+            </svg>
+            <span class="wm wm-navy" style="font-size:26px;">Arithmony</span>
+          </div>
+          <span class="scale-label">36px</span>
+        </div>
+
+        <div class="scale-item">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.6" fill="none"/>
+              <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.8" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+            </svg>
+            <span class="wm wm-navy" style="font-size:40px;">Arithmony</span>
+          </div>
+          <span class="scale-label">56px</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Clear space diagram -->
+  <div class="clearspace-wrap" style="margin-top:1px;">
+    <div class="clearspace-box">
+      <div class="clearspace-arrow top">← X unit clear space →</div>
+      <div class="clearspace-arrow bottom">← X = cap-height of "A" →</div>
+      <div class="clearspace-arrow left">X</div>
+      <div class="clearspace-arrow right">X</div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+          <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.9" fill="none"/>
+          <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="1.8" stroke-linecap="square"/>
+          <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="1.8" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.6" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+        </svg>
+        <span class="wm wm-navy" style="font-size:36px;">Arith<span style="color:var(--emerald);">mony</span></span>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:16px;right:24px;font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:var(--warm-gray);text-transform:uppercase;">Clear Space Diagram</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  07 — MISUSE
+══════════════════════════════════════ -->
+<div class="kit-section">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Logo Misuse — What Not To Do</span>
+  </div>
+
+  <div class="misuse-grid">
+
+    <!-- Misuse: stretched -->
+    <div class="misuse-tile">
+      <div class="misuse-x"></div>
+      <div style="transform:scaleX(1.5); transform-origin:center;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="30" height="30" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+            <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+            <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.8" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+          </svg>
+          <span class="wm wm-navy" style="font-size:18px;">Arithmony</span>
+        </div>
+      </div>
+      <p class="misuse-label">Never stretch or distort the mark</p>
+    </div>
+
+    <!-- Misuse: wrong colors -->
+    <div class="misuse-tile">
+      <div class="misuse-x"></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#E74C3C" stroke-width="1.5" fill="none"/>
+          <line x1="32" y1="9" x2="14" y2="48" stroke="#9B59B6" stroke-width="2" stroke-linecap="square"/>
+          <line x1="32" y1="9" x2="50" y2="48" stroke="#9B59B6" stroke-width="2" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="#E74C3C" stroke-width="1.8" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.5" fill="#E74C3C"/>
+        </svg>
+        <span class="wm" style="font-size:22px; color:#9B59B6;">Arithmony</span>
+      </div>
+      <p class="misuse-label">Never use off-brand colors</p>
+    </div>
+
+    <!-- Misuse: drop shadow -->
+    <div class="misuse-tile">
+      <div class="misuse-x"></div>
+      <div style="filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.5)); display:flex;align-items:center;gap:10px;">
+        <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+          <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+          <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.8" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+        </svg>
+        <span class="wm wm-navy" style="font-size:22px;">Arithmony</span>
+      </div>
+      <p class="misuse-label">Never add drop shadows</p>
+    </div>
+
+    <!-- Misuse: low contrast / wrong background -->
+    <div class="misuse-tile" style="background:#B8D4C8;">
+      <div class="misuse-x"></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+          <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.4)" stroke-width="1.5" fill="none"/>
+          <line x1="32" y1="9" x2="14" y2="48" stroke="rgba(13,27,62,0.3)" stroke-width="2" stroke-linecap="square"/>
+          <line x1="32" y1="9" x2="50" y2="48" stroke="rgba(13,27,62,0.3)" stroke-width="2" stroke-linecap="square"/>
+          <line x1="18" y1="35" x2="46" y2="35" stroke="rgba(0,168,120,0.4)" stroke-width="1.8" stroke-linecap="square"/>
+          <circle cx="32" cy="9" r="2.5" fill="rgba(0,168,120,0.4)"/>
+        </svg>
+        <span class="wm" style="font-size:22px; color:rgba(13,27,62,0.3);">Arithmony</span>
+      </div>
+      <p class="misuse-label">Never place on mid-tone or clashing grounds</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+  08 — IN CONTEXT
+══════════════════════════════════════ -->
+<div class="kit-section" style="padding-bottom:100px;">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <div class="section-head-rule"></div>
+    <span class="section-name">Logo in Context</span>
+  </div>
+
+  <div class="mockup-grid">
+
+    <!-- Mockup A: Website navbar -->
+    <div class="mockup-tile" style="background:var(--white);">
+      <div style="padding:12px 20px; background:var(--ivory); border-bottom:1px solid var(--rule); display:flex;align-items:center;gap:8px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#FF5F56;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#27C93F;"></div>
+        <div style="flex:1;height:20px;background:var(--white);border-radius:2px;margin:0 12px;display:flex;align-items:center;padding:0 10px;gap:6px;">
+          <svg width="10" height="10" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="3" fill="none"/>
+            <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="5" stroke-linecap="square"/>
+            <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="5" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="4" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="4" fill="#00A878"/>
+          </svg>
+          <span style="font-family:var(--font-sans);font-size:8px;font-weight:200;letter-spacing:0.1em;color:#666;">arithmony.com</span>
+        </div>
+      </div>
+      <div class="navbar-mockup">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+            <line x1="32" y1="9" x2="14" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+            <line x1="32" y1="9" x2="50" y2="48" stroke="#0D1B3E" stroke-width="2" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.8" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+          </svg>
+          <span class="wm wm-navy" style="font-size:20px;">Arith<span style="color:var(--emerald);">mony</span></span>
+        </div>
+        <div class="navbar-links">
+          <span class="navbar-link active">Dashboard</span>
+          <span class="navbar-link">Budget</span>
+          <span class="navbar-link">Goals</span>
+          <span class="navbar-link">Reports</span>
+        </div>
+        <button class="navbar-cta">Sign In</button>
+      </div>
+      <!-- Hero preview -->
+      <div style="padding: 40px 32px; background:var(--ivory); flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <p style="font-family:var(--font-sans);font-size:8px;font-weight:200;letter-spacing:0.4em;text-transform:uppercase;color:var(--emerald);margin-bottom:12px;">Personal Finance</p>
+        <p style="font-family:var(--font-display);font-size:28px;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:16px;">Your finances,<br><em style="color:var(--emerald);">in harmony.</em></p>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--warm-gray);line-height:1.6;max-width:320px;">Budget with precision. Save with intention. Understand your money like never before.</p>
+      </div>
+      <div style="padding:10px 20px;background:var(--white);border-top:1px solid var(--rule);">
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:var(--warm-gray);text-transform:uppercase;">Website — Desktop Nav</span>
+      </div>
+    </div>
+
+    <!-- Mockup B: Email header + phone -->
+    <div class="mockup-tile" style="background:var(--ivory);">
+      <!-- Email header -->
+      <div class="email-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+            <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+            <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="2" stroke-linecap="square"/>
+            <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="2" stroke-linecap="square"/>
+            <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.8" stroke-linecap="square"/>
+            <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+          </svg>
+          <span class="wm wm-white" style="font-size:22px;">Arith<span style="color:var(--emerald);">mony</span></span>
+        </div>
+        <span class="email-tagline">Monthly Summary</span>
+      </div>
+      <div class="email-body-preview">
+        <p style="font-family:var(--font-display);font-size:22px;font-weight:300;color:var(--navy);margin-bottom:10px;">Your February summary<br>is <em style="color:var(--emerald);">ready.</em></p>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--warm-gray);line-height:1.7;">You saved $480 last month — 18% more than your January average. Three categories came in under budget. Here's the full picture.</p>
+        <div style="margin-top:16px;display:flex;gap:20px;">
+          <div style="border-left:2px solid var(--emerald);padding-left:12px;">
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--warm-gray);letter-spacing:0.1em;">Saved</p>
+            <p style="font-family:var(--font-mono);font-size:20px;color:var(--emerald);">$480</p>
+          </div>
+          <div style="border-left:2px solid rgba(13,27,62,0.12);padding-left:12px;">
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--warm-gray);letter-spacing:0.1em;">Spent</p>
+            <p style="font-family:var(--font-mono);font-size:20px;color:var(--navy);">$2,840</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone mockup inline -->
+      <div style="display:flex;justify-content:center;padding:32px;background:var(--navy);">
+        <div style="width:160px;background:var(--navy-mid);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+          <!-- Status bar -->
+          <div style="background:var(--navy);padding:8px 16px 6px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--font-mono);font-size:7px;color:rgba(245,242,236,0.5);">9:41</span>
+            <svg width="60" height="8" viewBox="0 0 64 64" fill="none">
+              <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="3" fill="none"/>
+              <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="5" stroke-linecap="square"/>
+              <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="5" stroke-linecap="square"/>
+              <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="4" stroke-linecap="square"/>
+              <circle cx="32" cy="9" r="4" fill="#00A878"/>
+            </svg>
+            <span style="font-family:var(--font-mono);font-size:7px;color:rgba(245,242,236,0.5);">●●●</span>
+          </div>
+          <div style="padding:14px 14px 20px;">
+            <p style="font-family:var(--font-sans);font-size:7px;font-weight:200;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,242,236,0.4);margin-bottom:8px;">Net Worth</p>
+            <p style="font-family:var(--font-mono);font-size:20px;color:var(--white);letter-spacing:0.02em;margin-bottom:2px;">$48,320</p>
+            <p style="font-family:var(--font-mono);font-size:8px;color:var(--emerald);letter-spacing:0.08em;">↑ +$1,240</p>
+            <!-- Mini chart -->
+            <div style="display:flex;align-items:flex-end;gap:4px;height:40px;margin-top:14px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);">
+              <div style="flex:1;background:rgba(0,168,120,0.15);height:55%;border-top:1px solid rgba(0,168,120,0.3);"></div>
+              <div style="flex:1;background:rgba(0,168,120,0.15);height:70%;border-top:1px solid rgba(0,168,120,0.3);"></div>
+              <div style="flex:1;background:rgba(0,168,120,0.15);height:50%;border-top:1px solid rgba(0,168,120,0.3);"></div>
+              <div style="flex:1;background:rgba(0,168,120,0.2);height:85%;border-top:1px solid rgba(0,168,120,0.4);"></div>
+              <div style="flex:1;background:rgba(0,168,120,0.35);height:100%;border-top:2px solid var(--emerald);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:10px 20px;background:var(--white);border-top:1px solid var(--rule);">
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:var(--warm-gray);text-transform:uppercase;">Email Header &amp; Mobile App</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="background:var(--navy); padding:48px 72px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+      <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+      <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="2" stroke-linecap="square"/>
+      <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="2" stroke-linecap="square"/>
+      <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.8" stroke-linecap="square"/>
+      <circle cx="32" cy="9" r="2.5" fill="#00A878"/>
+    </svg>
+    <span class="wm wm-white" style="font-size:20px;">Arith<span style="color:var(--emerald);">mony</span></span>
+  </div>
+  <div style="display:flex;gap:32px;flex-wrap:wrap;">
+    <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:rgba(245,242,236,0.25);text-transform:uppercase;">17 Logo Variants</span>
+    <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:rgba(245,242,236,0.25);text-transform:uppercase;">8 Background Types</span>
+    <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:rgba(245,242,236,0.25);text-transform:uppercase;">3 Lockup Formats</span>
+    <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;color:rgba(245,242,236,0.25);text-transform:uppercase;">Logo Kit · 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Arithmony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory:     #F5F2EC;
+    --white:     #FDFCFA;
+    --navy:      #0D1B3E;
+    --navy-mid:  #1A2F5A;
+    --emerald:   #00A878;
+    --gold:      #C9A84C;
+    --warm-gray: #5C5448;
+    --body-text: #1C1814;
+    --rule:      rgba(13,27,62,0.12);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'Josefin Sans', sans-serif;
+    --font-mono:    'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--body-text);
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 17px;
+  }
+
+  .topbar {
+    background: var(--navy);
+    padding: 20px clamp(24px, 6vw, 100px);
+    display: flex; align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(0,168,120,0.12);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-wordmark {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 300;
+    letter-spacing: 0.12em; color: var(--white);
+  }
+  .nav-wordmark span { color: var(--emerald); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(245,242,236,0.4);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-link:hover, .nav-link.active { color: var(--emerald); }
+
+  .doc-hero {
+    background: var(--navy);
+    padding: 72px clamp(24px, 8vw, 140px) 64px;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid rgba(0,168,120,0.1);
+  }
+  .doc-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+  .doc-hero-content { position: relative; z-index: 1; }
+  .doc-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 200;
+    letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--emerald); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .doc-eyebrow-line { width: 32px; height: 1px; background: var(--emerald); opacity: 0.5; }
+  .doc-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300; letter-spacing: 0.04em;
+    color: var(--white); line-height: 1; margin-bottom: 20px;
+  }
+  .doc-title em { color: var(--emerald); font-style: italic; }
+  .doc-meta {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.12em;
+    color: rgba(245,242,236,0.3);
+    margin-top: 28px; display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .doc-meta span { color: rgba(245,242,236,0.15); }
+
+  .doc-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 4vw, 60px);
+    align-items: start;
+  }
+
+  .toc {
+    position: sticky; top: 65px;
+    padding: 56px 0 56px;
+    border-right: 1px solid var(--rule);
+    padding-right: 40px;
+  }
+  .toc-label {
+    font-family: var(--font-sans);
+    font-size: 8px; font-weight: 300;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--warm-gray); margin-bottom: 20px;
+  }
+  .toc-list { list-style: none; }
+  .toc-item { margin-bottom: 4px; }
+  .toc-link {
+    font-family: var(--font-sans);
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--warm-gray);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 0; transition: color 0.2s; line-height: 1.4;
+  }
+  .toc-link::before {
+    content: ''; width: 3px; height: 3px;
+    background: var(--emerald); transform: rotate(45deg);
+    flex-shrink: 0; opacity: 0; transition: opacity 0.2s;
+  }
+  .toc-link:hover { color: var(--navy); }
+  .toc-link:hover::before { opacity: 1; }
+
+  .doc-body { padding: 56px 0 100px 56px; }
+
+  .legal-notice {
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px; margin-bottom: 56px;
+  }
+  .legal-notice p {
+    font-family: var(--font-sans);
+    font-size: 10px; font-weight: 200;
+    letter-spacing: 0.1em; line-height: 1.7;
+    color: var(--warm-gray);
+  }
+  .legal-notice strong {
+    font-weight: 400; color: var(--navy);
+    letter-spacing: 0.15em; text-transform: uppercase; font-size: 9px;
+  }
+
+  .doc-section {
+    margin-bottom: 52px; padding-bottom: 52px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .doc-section:last-child { border-bottom: none; }
+
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--emerald); margin-bottom: 8px; display: block;
+  }
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 600;
+    letter-spacing: 0.03em; color: var(--navy);
+    margin-bottom: 20px; line-height: 1.2;
+  }
+  .section-heading em { color: var(--emerald); font-style: italic; font-weight: 300; }
+
+  p { margin-bottom: 16px; color: var(--body-text); }
+  p:last-child { margin-bottom: 0; }
+
+  ul.doc-list { list-style: none; margin: 16px 0 20px; padding: 0; }
+  ul.doc-list li {
+    padding: 10px 0 10px 24px; position: relative;
+    border-bottom: 1px solid var(--rule);
+    font-size: 16px; color: var(--body-text); line-height: 1.7;
+  }
+  ul.doc-list li:last-child { border-bottom: none; }
+  ul.doc-list li::before {
+    content: ''; position: absolute;
+    left: 4px; top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 5px; height: 5px; background: var(--emerald);
+  }
+
+  .highlight-box {
+    background: var(--ivory);
+    border: 1px solid rgba(13,27,62,0.12);
+    border-left: 3px solid var(--emerald);
+    padding: 20px 24px; margin: 24px 0;
+  }
+  .highlight-box p { font-size: 15px; margin-bottom: 8px; color: var(--body-text); }
+  .highlight-box p:last-child { margin-bottom: 0; }
+
+  .warning-box {
+    background: rgba(180, 40, 40, 0.05);
+    border: 1px solid rgba(180,40,40,0.2);
+    border-left: 3px solid #B03030;
+    padding: 20px 24px; margin: 24px 0;
+  }
+  .warning-box p { font-size: 15px; margin-bottom: 8px; color: var(--body-text); }
+  .warning-box p:last-child { margin-bottom: 0; }
+  .warning-box strong { color: #8B1A1A; font-weight: 600; }
+
+  .sub-heading {
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 300;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--navy); margin: 28px 0 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sub-heading::after {
+    content: ''; flex: 1; height: 1px; background: var(--rule);
+  }
+
+  .plan-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--rule);
+    border: 1px solid rgba(13,27,62,0.15); margin: 24px 0;
+  }
+  .plan-cell {
+    background: var(--ivory); padding: 24px 20px;
+  }
+  .plan-cell.featured { background: var(--navy); }
+  .plan-name {
+    font-family: var(--font-sans);
+    font-size: 9px; font-weight: 300;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--warm-gray); margin-bottom: 8px;
+  }
+  .plan-cell.featured .plan-name { color: var(--emerald); }
+  .plan-desc {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 400;
+    line-height: 1.6; color: var(--body-text);
+  }
+  .plan-cell.featured .plan-desc { color: rgba(245,242,236,0.75); }
+
+  .contact-block {
+    background: var(--navy); padding: 32px 36px;
+    margin-top: 24px; position: relative; overflow: hidden;
+  }
+  .contact-block::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--emerald);
+  }
+  .contact-block p { color: rgba(245,242,236,0.6); font-size: 15px; margin-bottom: 8px; }
+  .contact-block a {
+    color: var(--emerald); text-decoration: none;
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.05em;
+  }
+  .contact-block .contact-label {
+    font-family: var(--font-sans);
+    font-size: 8px; font-weight: 200;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(245,242,236,0.3);
+    margin-bottom: 12px; display: block;
+  }
+
+  .doc-footer {
+    background: var(--navy);
+    padding: 40px clamp(24px, 6vw, 100px);
+    display: flex; align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid rgba(0,168,120,0.1);
+  }
+  .footer-left {
+    font-family: var(--font-mono); font-size: 8px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-link {
+    font-family: var(--font-mono); font-size: 8px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,242,236,0.2); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--emerald); }
+
+  @media (max-width: 760px) {
+    .doc-layout { grid-template-columns: 1fr; }
+    .toc { display: none; }
+    .doc-body { padding: 40px 0 80px; }
+    .nav-links { display: none; }
+    .plan-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topbar">
+  <a class="nav-logo" href="#">
+    <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+      <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+      <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.8" fill="none"/>
+      <line x1="32" y1="9" x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.8" stroke-linecap="square"/>
+      <line x1="32" y1="9" x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.8" stroke-linecap="square"/>
+      <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.5" stroke-linecap="square"/>
+      <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+    </svg>
+    <span class="nav-wordmark">Arith<span>mony</span></span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="arithmony-privacy-policy.html">Privacy Policy</a>
+    <a class="nav-link active" href="arithmony-terms-of-service.html">Terms of Service</a>
+    <a class="nav-link" href="#">Back to App</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="doc-hero">
+  <div class="doc-hero-bg">
+    <svg width="100%" height="100%" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMid slice" fill="none">
+      <rect x="800" y="-160" width="600" height="600" transform="rotate(45 1000 110)" stroke="rgba(0,168,120,0.04)" stroke-width="1" fill="none"/>
+      <rect x="880" y="-100" width="440" height="440" transform="rotate(45 1000 110)" stroke="rgba(0,168,120,0.03)" stroke-width="1" fill="none"/>
+      <g stroke="rgba(0,168,120,0.08)" stroke-width="0.75">
+        <polyline points="0,30 30,30 30,0"/>
+        <polyline points="0,48 48,48 48,0"/>
+        <line x1="1200" y1="219" x2="0" y2="219"/>
+      </g>
+    </svg>
+  </div>
+  <div class="doc-hero-content">
+    <div class="doc-eyebrow">
+      <div class="doc-eyebrow-line"></div>
+      Legal Document
+    </div>
+    <h1 class="doc-title">Terms of <em>Service</em></h1>
+    <div class="doc-meta">
+      <span>Effective Date: <span>·</span> January 1, 2026</span>
+      <span>Last Updated: <span>·</span> January 1, 2026</span>
+      <span>Jurisdiction: <span>·</span> United States</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="doc-layout">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <p class="toc-label">Contents</p>
+    <ul class="toc-list">
+      <li class="toc-item"><a class="toc-link" href="#acceptance">Acceptance of Terms</a></li>
+      <li class="toc-item"><a class="toc-link" href="#eligibility">Eligibility</a></li>
+      <li class="toc-item"><a class="toc-link" href="#accounts">Your Account</a></li>
+      <li class="toc-item"><a class="toc-link" href="#subscriptions">Subscriptions &amp; Billing</a></li>
+      <li class="toc-item"><a class="toc-link" href="#plaid">Plaid &amp; Financial Connections</a></li>
+      <li class="toc-item"><a class="toc-link" href="#acceptable-use">Acceptable Use</a></li>
+      <li class="toc-item"><a class="toc-link" href="#intellectual-property">Intellectual Property</a></li>
+      <li class="toc-item"><a class="toc-link" href="#disclaimers">Disclaimers</a></li>
+      <li class="toc-item"><a class="toc-link" href="#limitation">Limitation of Liability</a></li>
+      <li class="toc-item"><a class="toc-link" href="#indemnification">Indemnification</a></li>
+      <li class="toc-item"><a class="toc-link" href="#termination">Termination</a></li>
+      <li class="toc-item"><a class="toc-link" href="#disputes">Dispute Resolution</a></li>
+      <li class="toc-item"><a class="toc-link" href="#general">General Provisions</a></li>
+      <li class="toc-item"><a class="toc-link" href="#contact">Contact Us</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="doc-body">
+
+    <div class="legal-notice">
+      <p><strong>Note —</strong> These Terms of Service were drafted as a starting point tailored to Arithmony's subscription-based model and Plaid integration. They do not constitute legal advice. Please have a qualified attorney review these terms before publishing, particularly the dispute resolution, limitation of liability, and financial data sections.</p>
+    </div>
+
+    <!-- 1. Acceptance -->
+    <div class="doc-section" id="acceptance">
+      <span class="section-num">01</span>
+      <h2 class="section-heading">Acceptance of <em>Terms</em></h2>
+      <p>These Terms of Service ("Terms") constitute a legally binding agreement between you and Arithmony ("Company," "we," "us," or "our") governing your access to and use of the Arithmony web application and any related services (collectively, the "Service").</p>
+      <p>By creating an account, accessing the Service, or clicking "I Agree," you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy, which is incorporated herein by reference.</p>
+      <p>If you do not agree to these Terms, you must not access or use the Service.</p>
+    </div>
+
+    <!-- 2. Eligibility -->
+    <div class="doc-section" id="eligibility">
+      <span class="section-num">02</span>
+      <h2 class="section-heading">Eligibility</h2>
+      <p>To use the Service, you must:</p>
+      <ul class="doc-list">
+        <li>Be at least 18 years of age</li>
+        <li>Be a resident of the United States or a jurisdiction where the Service is available</li>
+        <li>Have the legal capacity to enter into a binding contract</li>
+        <li>Not be prohibited from using the Service under applicable law</li>
+      </ul>
+      <p>By using the Service, you represent and warrant that you meet all eligibility requirements. If you are using the Service on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p>
+    </div>
+
+    <!-- 3. Accounts -->
+    <div class="doc-section" id="accounts">
+      <span class="section-num">03</span>
+      <h2 class="section-heading">Your <em>Account</em></h2>
+      <p>To access most features of the Service, you must register for an account. When creating your account, you agree to:</p>
+      <ul class="doc-list">
+        <li>Provide accurate, current, and complete information</li>
+        <li>Maintain and promptly update your account information</li>
+        <li>Keep your password secure and confidential</li>
+        <li>Notify us immediately of any unauthorized access to your account at <a href="mailto:support@arithmony.com" style="color:var(--emerald); font-family:var(--font-mono); font-size:14px;">support@arithmony.com</a></li>
+        <li>Accept responsibility for all activity that occurs under your account</li>
+      </ul>
+      <p>You may not share your account credentials with others or create multiple accounts for the purpose of circumventing restrictions. We reserve the right to suspend or terminate accounts that we believe are being misused.</p>
+    </div>
+
+    <!-- 4. Subscriptions -->
+    <div class="doc-section" id="subscriptions">
+      <span class="section-num">04</span>
+      <h2 class="section-heading">Subscriptions <em>&amp; Billing</em></h2>
+
+      <p class="sub-heading">Plans</p>
+      <p>Arithmony offers both free and paid subscription plans. Paid plans provide access to additional features as described on our pricing page. Details of current plans and pricing are available within the Service and may be updated from time to time.</p>
+
+      <div class="plan-grid">
+        <div class="plan-cell">
+          <p class="plan-name">Free Plan</p>
+          <p class="plan-desc">Access to core budgeting features. No payment required. Feature limitations apply as described in the Service.</p>
+        </div>
+        <div class="plan-cell featured">
+          <p class="plan-name">Paid Subscription</p>
+          <p class="plan-desc">Full access to all features including Plaid bank connections, advanced reporting, and unlimited budget categories. Billed on the cycle you select at checkout.</p>
+        </div>
+      </div>
+
+      <p class="sub-heading">Billing &amp; Renewal</p>
+      <ul class="doc-list">
+        <li>Paid subscriptions are billed in advance on a recurring basis (monthly or annually, as selected).</li>
+        <li>Subscriptions automatically renew at the end of each billing period unless cancelled before the renewal date.</li>
+        <li>You authorize us to charge your payment method on file for each renewal period.</li>
+        <li>All fees are stated in US dollars and are exclusive of applicable taxes, which you are responsible for paying.</li>
+      </ul>
+
+      <p class="sub-heading">Cancellation</p>
+      <p>You may cancel your subscription at any time from your account settings. Cancellation takes effect at the end of the current billing period — you will retain access to paid features until that date. We do not provide refunds for partial billing periods.</p>
+
+      <p class="sub-heading">Price Changes</p>
+      <p>We reserve the right to change subscription pricing. We will provide at least 30 days' notice of any price increase via email. Your continued use of the Service after a price change constitutes acceptance of the new pricing. If you do not accept a price change, you may cancel before it takes effect.</p>
+
+      <p class="sub-heading">Free Trials</p>
+      <p>We may offer free trial periods from time to time. At the end of a free trial, your subscription will automatically convert to a paid plan unless you cancel before the trial ends. You will be notified of the trial end date at sign-up.</p>
+
+      <div class="highlight-box">
+        <p>Payment card information is processed and stored by our third-party payment processor. Arithmony does not store your full card number, CVV, or other sensitive payment details on our servers.</p>
+      </div>
+    </div>
+
+    <!-- 5. Plaid -->
+    <div class="doc-section" id="plaid">
+      <span class="section-num">05</span>
+      <h2 class="section-heading">Plaid &amp; <em>Financial Connections</em></h2>
+      <p>Certain features of Arithmony allow you to connect your bank and financial accounts through Plaid Technologies, Inc. ("Plaid"). By using these features, you agree to Plaid's Terms of Use and Privacy Policy in addition to these Terms.</p>
+      <ul class="doc-list">
+        <li>You authorize Arithmony to access, through Plaid, the financial account data necessary to provide the Service, including but not limited to account balances, transaction history, and account identifiers.</li>
+        <li>This access is read-only. Arithmony cannot and will not initiate transfers, payments, or any transactions on your behalf.</li>
+        <li>You represent that you are the authorized account holder of any financial accounts you connect, or that you have permission from the account holder to connect such accounts.</li>
+        <li>You may revoke Arithmony's access to your financial accounts at any time via your account settings. Revoking access may limit the functionality of the Service.</li>
+      </ul>
+      <div class="warning-box">
+        <p><strong>Important:</strong> Arithmony is a budgeting and financial tracking tool. It is not a bank, investment adviser, broker-dealer, or financial institution. The Service does not provide financial, investment, tax, or legal advice. Financial data displayed in the Service is provided for informational purposes only.</p>
+      </div>
+    </div>
+
+    <!-- 6. Acceptable Use -->
+    <div class="doc-section" id="acceptable-use">
+      <span class="section-num">06</span>
+      <h2 class="section-heading">Acceptable <em>Use</em></h2>
+      <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You must not:</p>
+      <ul class="doc-list">
+        <li>Use the Service in any way that violates applicable federal, state, or local law or regulation</li>
+        <li>Attempt to gain unauthorized access to any part of the Service, other user accounts, or our systems</li>
+        <li>Use automated means (bots, scrapers, crawlers) to access or collect data from the Service without our express written permission</li>
+        <li>Transmit any malicious code, viruses, or harmful software through the Service</li>
+        <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity</li>
+        <li>Use the Service to process or store data belonging to others without their authorization</li>
+        <li>Interfere with or disrupt the integrity or performance of the Service</li>
+        <li>Attempt to reverse-engineer, decompile, or disassemble any part of the Service</li>
+      </ul>
+      <p>We reserve the right to investigate and take appropriate action against violations of these provisions, including suspension or termination of accounts and referral to law enforcement.</p>
+    </div>
+
+    <!-- 7. Intellectual Property -->
+    <div class="doc-section" id="intellectual-property">
+      <span class="section-num">07</span>
+      <h2 class="section-heading">Intellectual <em>Property</em></h2>
+      <p>The Service, including all content, features, functionality, design, logos, trademarks, and software, is owned by Arithmony and protected by United States and international intellectual property laws.</p>
+      <p>We grant you a limited, non-exclusive, non-transferable, revocable license to access and use the Service for your personal, non-commercial purposes in accordance with these Terms. This license does not include the right to sublicense, sell, resell, copy, or modify any part of the Service.</p>
+      <p>You retain ownership of the data you input into the Service (your budget data, notes, and goals). By using the Service, you grant us a limited license to store, process, and display that data solely for the purpose of providing the Service to you.</p>
+    </div>
+
+    <!-- 8. Disclaimers -->
+    <div class="doc-section" id="disclaimers">
+      <span class="section-num">08</span>
+      <h2 class="section-heading">Disclaimers</h2>
+      <div class="warning-box">
+        <p><strong>The Service is provided "as is" and "as available" without warranties of any kind, express or implied.</strong> To the fullest extent permitted by law, Arithmony disclaims all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+      </div>
+      <p>We do not warrant that:</p>
+      <ul class="doc-list">
+        <li>The Service will be uninterrupted, error-free, or secure</li>
+        <li>Financial data displayed in the Service will be accurate, complete, or current at all times</li>
+        <li>Any errors in the Service will be corrected</li>
+        <li>The Service will meet your specific requirements</li>
+      </ul>
+      <p>Financial data is sourced from third parties including Plaid and your financial institutions. Arithmony is not responsible for inaccuracies in data provided by these third parties. You should verify important financial information directly with your financial institution.</p>
+    </div>
+
+    <!-- 9. Limitation of Liability -->
+    <div class="doc-section" id="limitation">
+      <span class="section-num">09</span>
+      <h2 class="section-heading">Limitation of <em>Liability</em></h2>
+      <p>To the fullest extent permitted by applicable law, Arithmony and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+      <ul class="doc-list">
+        <li>Loss of profits, revenue, data, or business opportunities</li>
+        <li>Financial decisions made based on information displayed in the Service</li>
+        <li>Unauthorized access to or alteration of your data</li>
+        <li>Interruption or cessation of the Service</li>
+        <li>Errors or inaccuracies in financial data provided by third-party services</li>
+      </ul>
+      <p>In no event shall Arithmony's total cumulative liability to you for any claims arising from or relating to these Terms or the Service exceed the greater of (a) the total amount you paid to Arithmony in the twelve months preceding the claim, or (b) $50 USD.</p>
+      <p>Some jurisdictions do not allow the exclusion or limitation of certain damages, so the above limitations may not apply to you.</p>
+    </div>
+
+    <!-- 10. Indemnification -->
+    <div class="doc-section" id="indemnification">
+      <span class="section-num">10</span>
+      <h2 class="section-heading">Indemnification</h2>
+      <p>You agree to defend, indemnify, and hold harmless Arithmony and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising out of or related to:</p>
+      <ul class="doc-list">
+        <li>Your use of the Service in violation of these Terms</li>
+        <li>Your violation of any applicable law or regulation</li>
+        <li>Your violation of any third-party rights, including intellectual property or privacy rights</li>
+        <li>Any content or data you submit to or through the Service</li>
+      </ul>
+    </div>
+
+    <!-- 11. Termination -->
+    <div class="doc-section" id="termination">
+      <span class="section-num">11</span>
+      <h2 class="section-heading">Termination</h2>
+      <p>You may terminate your account at any time by using the account deletion feature within the Service or by contacting us at support@arithmony.com. Upon termination, your right to use the Service ceases immediately.</p>
+      <p>We may suspend or terminate your account and access to the Service at our discretion, with or without notice, if we believe you have violated these Terms, engaged in fraudulent or harmful behavior, or for any other reason we deem appropriate. In cases of material violation, we may terminate without prior notice.</p>
+      <p>Upon termination, we will delete your personal data in accordance with our Privacy Policy, subject to any legal obligations to retain certain records. Provisions of these Terms that by their nature should survive termination — including intellectual property, disclaimers, limitation of liability, and dispute resolution — will survive.</p>
+    </div>
+
+    <!-- 12. Dispute Resolution -->
+    <div class="doc-section" id="disputes">
+      <span class="section-num">12</span>
+      <h2 class="section-heading">Dispute <em>Resolution</em></h2>
+
+      <p class="sub-heading">Informal Resolution</p>
+      <p>Before filing any formal legal claim, you agree to contact us at legal@arithmony.com to attempt to resolve the dispute informally. We will make a good-faith effort to resolve any dispute within 30 days of receiving your notice.</p>
+
+      <p class="sub-heading">Governing Law</p>
+      <p>These Terms are governed by and construed in accordance with the laws of the United States and the state in which Arithmony is headquartered, without regard to conflict of law principles.</p>
+
+      <p class="sub-heading">Arbitration</p>
+      <p>If informal resolution fails, you and Arithmony agree that any dispute, claim, or controversy arising out of or relating to these Terms or the Service shall be resolved by binding individual arbitration, rather than in court, except that you may assert claims in small claims court if your claims qualify.</p>
+
+      <div class="highlight-box">
+        <p><strong>Class Action Waiver:</strong> You and Arithmony agree that each may bring claims against the other only in your or its individual capacity, and not as a plaintiff or class member in any purported class or representative proceeding.</p>
+      </div>
+
+      <p class="sub-heading">Exceptions</p>
+      <p>Either party may seek injunctive or other equitable relief in a court of competent jurisdiction to prevent actual or threatened infringement, misappropriation, or violation of intellectual property rights.</p>
+    </div>
+
+    <!-- 13. General -->
+    <div class="doc-section" id="general">
+      <span class="section-num">13</span>
+      <h2 class="section-heading">General <em>Provisions</em></h2>
+      <ul class="doc-list">
+        <li><strong>Entire Agreement.</strong> These Terms, together with the Privacy Policy and any additional terms you agree to, constitute the entire agreement between you and Arithmony regarding the Service.</li>
+        <li><strong>Severability.</strong> If any provision of these Terms is found unenforceable, that provision will be modified to the minimum extent necessary to make it enforceable, and the remaining provisions will remain in full effect.</li>
+        <li><strong>Waiver.</strong> Our failure to enforce any right or provision of these Terms will not constitute a waiver of that right or provision.</li>
+        <li><strong>Assignment.</strong> You may not assign your rights or obligations under these Terms without our prior written consent. We may assign our rights and obligations freely, including in connection with a merger, acquisition, or sale of assets.</li>
+        <li><strong>Updates to Terms.</strong> We may update these Terms from time to time. Material changes will be communicated by email or prominent notice within the Service at least 14 days before taking effect. Continued use of the Service after updated Terms take effect constitutes acceptance.</li>
+        <li><strong>Force Majeure.</strong> We are not liable for any failure or delay in performance resulting from causes beyond our reasonable control, including natural disasters, acts of government, internet or infrastructure failures, or third-party service outages.</li>
+      </ul>
+    </div>
+
+    <!-- 14. Contact -->
+    <div class="doc-section" id="contact">
+      <span class="section-num">14</span>
+      <h2 class="section-heading">Contact <em>Us</em></h2>
+      <p>For questions about these Terms, please contact us:</p>
+      <div class="contact-block">
+        <span class="contact-label">Legal &amp; Terms Inquiries</span>
+        <p>Arithmony</p>
+        <p>Email: <a href="mailto:legal@arithmony.com">legal@arithmony.com</a></p>
+        <p style="margin-top:16px;">Support: <a href="mailto:support@arithmony.com">support@arithmony.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <span class="footer-left">© 2026 Arithmony · All rights reserved</span>
+  <div class="footer-links">
+    <a class="footer-link" href="arithmony-privacy-policy.html">Privacy Policy</a>
+    <a class="footer-link active" href="arithmony-terms-of-service.html">Terms of Service</a>
+    <a class="footer-link" href="mailto:legal@arithmony.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmony — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory:    #F5F2EC;
+    --white:    #FDFCFA;
+    --navy:     #0D1B3E;
+    --navy-mid: #1A2F5A;
+    --navy-lt:  #2C4380;
+    --emerald:  #00A878;
+    --emerald-lt: #00C994;
+    --gold:     #C9A84C;
+    --warm-gray:#8A8070;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'Josefin Sans', sans-serif;
+    --font-mono:    'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── GEOMETRIC BACKGROUND ── */
+  .bg-geo {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* Slow rotating outer diamond */
+  .geo-diamond-outer {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: min(140vw, 140vh);
+    height: min(140vw, 140vh);
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: rotateSlow 80s linear infinite;
+  }
+  .geo-diamond-inner {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: min(90vw, 90vh);
+    height: min(90vw, 90vh);
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: rotateSlow 50s linear infinite reverse;
+  }
+  .geo-diamond-mid {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: min(50vw, 50vh);
+    height: min(50vw, 50vh);
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation: rotateSlow 30s linear infinite;
+  }
+
+  @keyframes rotateSlow {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Radial gradient overlay */
+  .bg-radial {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%,
+      rgba(13,27,62,0) 0%,
+      rgba(13,27,62,0.4) 50%,
+      rgba(13,27,62,0.92) 100%);
+  }
+
+  /* Grain texture */
+  .bg-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 180px;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 clamp(24px, 6vw, 100px);
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 36px 0 0;
+    opacity: 0;
+    animation: fadeDown 0.8s ease 0.2s both;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--white);
+  }
+  .nav-wordmark span { color: var(--emerald); }
+
+  .nav-badge {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    border: 1px solid rgba(0,168,120,0.3);
+    padding: 4px 10px;
+    position: relative;
+  }
+  .nav-badge::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 5px; height: 5px;
+    border-top: 1px solid var(--emerald);
+    border-left: 1px solid var(--emerald);
+  }
+  .nav-badge::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 5px; height: 5px;
+    border-bottom: 1px solid var(--emerald);
+    border-right: 1px solid var(--emerald);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 0 40px;
+    gap: 0;
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .eyebrow-line {
+    width: 40px; height: 1px;
+    background: var(--emerald);
+    opacity: 0.5;
+  }
+  .eyebrow-text {
+    font-size: 9px;
+    font-weight: 200;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--emerald);
+  }
+
+  /* Hero headline */
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 9vw, 130px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.55s both;
+  }
+  .headline em {
+    color: var(--emerald);
+    font-style: italic;
+    display: block;
+  }
+
+  /* Geometric rule under headline */
+  .headline-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin: 28px 0 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.65s both;
+  }
+  .headline-rule-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,168,120,0.4));
+  }
+  .headline-rule-line.rev {
+    background: linear-gradient(to left, transparent, rgba(0,168,120,0.4));
+  }
+  .headline-rule-diamond {
+    width: 6px; height: 6px;
+    background: var(--emerald);
+    transform: rotate(45deg);
+  }
+
+  /* Sub-headline */
+  .subline {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(245,242,236,0.55);
+    max-width: 520px;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.75s both;
+  }
+
+  /* ── SIGNUP FORM ── */
+  .signup-wrap {
+    width: 100%;
+    max-width: 520px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s both;
+  }
+
+  .signup-form {
+    display: flex;
+    gap: 0;
+    position: relative;
+    width: 100%;
+  }
+
+  .signup-input {
+    flex: 1;
+    background: rgba(245,242,236,0.04);
+    border: 1px solid rgba(245,242,236,0.15);
+    border-right: none;
+    padding: 16px 20px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 200;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    -webkit-appearance: none;
+  }
+  .signup-input::placeholder {
+    color: rgba(245,242,236,0.25);
+    letter-spacing: 0.2em;
+  }
+  .signup-input:focus {
+    border-color: rgba(0,168,120,0.5);
+    background: rgba(245,242,236,0.06);
+  }
+
+  .signup-btn {
+    background: var(--emerald);
+    border: 1px solid var(--emerald);
+    padding: 16px 28px;
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--white);
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: background 0.25s ease, transform 0.15s ease;
+    -webkit-appearance: none;
+  }
+  .signup-btn:hover {
+    background: var(--emerald-lt);
+    border-color: var(--emerald-lt);
+  }
+  .signup-btn:active { transform: scale(0.98); }
+  .signup-btn.loading { pointer-events: none; opacity: 0.7; }
+
+  /* Success state */
+  .signup-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid rgba(0,168,120,0.25);
+    background: rgba(0,168,120,0.06);
+    position: relative;
+  }
+  .signup-success::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--emerald);
+  }
+  .signup-success.visible { display: flex; }
+
+  .success-icon {
+    width: 32px; height: 32px;
+    border: 1px solid var(--emerald);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+  }
+  .success-icon svg { transform: rotate(-45deg); }
+
+  .success-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--white);
+  }
+  .success-sub {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(245,242,236,0.45);
+  }
+
+  /* Error message */
+  .form-error {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #E07070;
+    margin-top: 10px;
+    text-align: left;
+    display: none;
+    padding-left: 2px;
+  }
+  .form-error.visible { display: block; }
+
+  .signup-note {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: rgba(245,242,236,0.2);
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  /* ── COUNTER ── */
+  .counter-wrap {
+    margin-top: 56px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.05s both;
+  }
+  .counter-rule {
+    width: 1px; height: 32px;
+    background: rgba(245,242,236,0.1);
+  }
+  .counter-item {
+    text-align: center;
+  }
+  .counter-value {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .counter-value span { color: var(--emerald); }
+  .counter-label {
+    font-size: 8px;
+    font-weight: 200;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.3);
+  }
+
+  /* ── FEATURES STRIP ── */
+  .features {
+    width: 100%;
+    max-width: 760px;
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(245,242,236,0.06);
+    border: 1px solid rgba(245,242,236,0.06);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s both;
+  }
+  .feature-cell {
+    padding: 28px 24px;
+    background: rgba(13,27,62,0.4);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+  .feature-cell:hover { background: rgba(13,27,62,0.6); }
+  .feature-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px; height: 0;
+    background: var(--emerald);
+    transition: height 0.4s ease;
+  }
+  .feature-cell:hover::before { height: 100%; }
+
+  .feature-icon {
+    margin-bottom: 14px;
+  }
+  .feature-name {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 200;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .feature-desc {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(245,242,236,0.4);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 0 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(245,242,236,0.06);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.35s both;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-left {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+  }
+  .footer-right {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--emerald); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PULSE DOT ── */
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--emerald);
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+  }
+  .live-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--emerald);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%   { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .features { grid-template-columns: 1fr; }
+    .signup-form { flex-direction: column; }
+    .signup-input { border-right: 1px solid rgba(245,242,236,0.15); border-bottom: none; }
+    .signup-btn { border-top: none; padding: 16px; }
+    .counter-wrap { gap: 20px; }
+    .counter-value { font-size: 18px; }
+    nav { padding-top: 24px; }
+    .headline { letter-spacing: 0; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── GEOMETRIC BACKGROUND ── -->
+<div class="bg-geo">
+  <!-- Outer rotating diamond frame -->
+  <div class="geo-diamond-outer">
+    <svg width="100%" height="100%" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="760" height="760" transform="rotate(45 400 400)"
+            stroke="rgba(0,168,120,0.05)" stroke-width="1" fill="none"/>
+      <rect x="60" y="60" width="680" height="680" transform="rotate(45 400 400)"
+            stroke="rgba(0,168,120,0.04)" stroke-width="1" fill="none"/>
+      <rect x="120" y="120" width="560" height="560" transform="rotate(45 400 400)"
+            stroke="rgba(0,168,120,0.03)" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Inner rotating diamond -->
+  <div class="geo-diamond-inner">
+    <svg width="100%" height="100%" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="560" height="560" transform="rotate(45 300 300)"
+            stroke="rgba(201,168,76,0.04)" stroke-width="0.75" fill="none"/>
+      <rect x="80" y="80" width="440" height="440" transform="rotate(45 300 300)"
+            stroke="rgba(201,168,76,0.03)" stroke-width="0.75" fill="none"/>
+      <!-- Radiating lines -->
+      <g stroke="rgba(0,168,120,0.03)" stroke-width="0.5">
+        <line x1="300" y1="300" x2="0" y2="0"/>
+        <line x1="300" y1="300" x2="300" y2="0"/>
+        <line x1="300" y1="300" x2="600" y2="0"/>
+        <line x1="300" y1="300" x2="600" y2="300"/>
+        <line x1="300" y1="300" x2="600" y2="600"/>
+        <line x1="300" y1="300" x2="300" y2="600"/>
+        <line x1="300" y1="300" x2="0" y2="600"/>
+        <line x1="300" y1="300" x2="0" y2="300"/>
+        <line x1="300" y1="300" x2="150" y2="0"/>
+        <line x1="300" y1="300" x2="450" y2="0"/>
+        <line x1="300" y1="300" x2="600" y2="150"/>
+        <line x1="300" y1="300" x2="600" y2="450"/>
+        <line x1="300" y1="300" x2="450" y2="600"/>
+        <line x1="300" y1="300" x2="150" y2="600"/>
+        <line x1="300" y1="300" x2="0" y2="450"/>
+        <line x1="300" y1="300" x2="0" y2="150"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Mid diamond -->
+  <div class="geo-diamond-mid">
+    <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none">
+      <rect x="10" y="10" width="380" height="380" transform="rotate(45 200 200)"
+            stroke="rgba(0,168,120,0.06)" stroke-width="1" fill="none"/>
+      <rect x="60" y="60" width="280" height="280" transform="rotate(45 200 200)"
+            stroke="rgba(0,168,120,0.04)" stroke-width="0.75" fill="none"/>
+      <circle cx="200" cy="200" r="100" stroke="rgba(0,168,120,0.03)" stroke-width="0.5" fill="none"/>
+      <circle cx="200" cy="200" r="60" stroke="rgba(0,168,120,0.04)" stroke-width="0.5" fill="none"/>
+      <circle cx="200" cy="200" r="3" fill="rgba(0,168,120,0.2)"/>
+    </svg>
+  </div>
+
+  <!-- Corner ornaments (fixed, not rotating) -->
+  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="rgba(0,168,120,0.1)" stroke-width="0.75">
+      <polyline points="32,80 80,80 80,32"/>
+      <polyline points="32,100 100,100 100,32"/>
+      <line x1="56" y1="32" x2="56" y2="80"/>
+      <line x1="32" y1="56" x2="80" y2="56"/>
+    </g>
+    <g stroke="rgba(0,168,120,0.1)" stroke-width="0.75">
+      <polyline points="1408,80 1360,80 1360,32"/>
+      <polyline points="1408,100 1340,100 1340,32"/>
+      <line x1="1384" y1="32" x2="1384" y2="80"/>
+      <line x1="1408" y1="56" x2="1360" y2="56"/>
+    </g>
+    <g stroke="rgba(0,168,120,0.07)" stroke-width="0.75">
+      <polyline points="32,820 80,820 80,868"/>
+      <polyline points="32,800 100,800 100,868"/>
+    </g>
+    <g stroke="rgba(0,168,120,0.07)" stroke-width="0.75">
+      <polyline points="1408,820 1360,820 1360,868"/>
+      <polyline points="1408,800 1340,800 1340,868"/>
+    </g>
+  </svg>
+
+  <div class="bg-radial"></div>
+  <div class="bg-grain"></div>
+</div>
+
+
+<!-- ── PAGE ── -->
+<div class="page">
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+        <rect x="5" y="5" width="54" height="54" transform="rotate(45 32 32)" stroke="#00A878" stroke-width="1.5" fill="none"/>
+        <rect x="15" y="15" width="34" height="34" transform="rotate(45 32 32)" stroke="rgba(0,168,120,0.3)" stroke-width="0.8" fill="none"/>
+        <line x1="32" y1="9"  x2="14" y2="48" stroke="#FDFCFA" stroke-width="1.8" stroke-linecap="square"/>
+        <line x1="32" y1="9"  x2="50" y2="48" stroke="#FDFCFA" stroke-width="1.8" stroke-linecap="square"/>
+        <line x1="18" y1="35" x2="46" y2="35" stroke="#00A878" stroke-width="1.5" stroke-linecap="square"/>
+        <circle cx="32" cy="9" r="2.2" fill="#00A878"/>
+      </svg>
+      <span class="nav-wordmark">Arith<span>mony</span></span>
+    </a>
+    <div class="nav-badge">
+      <span class="live-dot"></span>Coming Soon
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Something extraordinary is being built</span>
+      <div class="eyebrow-line"></div>
+    </div>
+
+    <h1 class="headline">
+      Your finances,<em>in harmony.</em>
+    </h1>
+
+    <div class="headline-rule">
+      <div class="headline-rule-line rev"></div>
+      <div class="headline-rule-diamond"></div>
+      <div class="headline-rule-line"></div>
+    </div>
+
+    <p class="subline">
+      A new kind of budgeting app — built with the precision of mathematics and the grace of balance. We're putting the final touches on something you'll love.
+    </p>
+
+    <!-- SIGNUP -->
+    <div class="signup-wrap">
+      <div class="signup-form" id="signupForm">
+        <input
+          class="signup-input"
+          type="email"
+          id="emailInput"
+          placeholder="your@email.com"
+          autocomplete="email"
+          spellcheck="false"
+        />
+        <button class="signup-btn" id="signupBtn" onclick="handleSignup()">
+          Notify Me
+        </button>
+      </div>
+      <div class="form-error" id="formError">Please enter a valid email address.</div>
+      <div class="signup-success" id="signupSuccess">
+        <div class="success-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <polyline points="2,7 5.5,10.5 12,3.5" stroke="#00A878" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </div>
+        <p class="success-title">You're on the list.</p>
+        <p class="success-sub">We'll reach out the moment Arithmony launches.</p>
+      </div>
+      <p class="signup-note" id="signupNote">No spam. One email when we launch. Unsubscribe anytime.</p>
+    </div>
+
+    <!-- COUNTER -->
+    <div class="counter-wrap">
+      <div class="counter-item">
+        <div class="counter-value" id="counterSignups">—</div>
+        <div class="counter-label">Early signups</div>
+      </div>
+      <div class="counter-rule"></div>
+      <div class="counter-item">
+        <div class="counter-value"><span>Q3</span> 2026</div>
+        <div class="counter-label">Target launch</div>
+      </div>
+      <div class="counter-rule"></div>
+      <div class="counter-item">
+        <div class="counter-value"><span>Free</span></div>
+        <div class="counter-label">To get started</div>
+      </div>
+    </div>
+
+    <!-- FEATURES STRIP -->
+    <div class="features">
+
+      <div class="feature-cell">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="2" width="20" height="20" transform="rotate(45 12 12)" stroke="#00A878" stroke-width="1" fill="none"/>
+            <line x1="6" y1="13" x2="18" y2="13" stroke="#00A878" stroke-width="1" stroke-linecap="square"/>
+            <line x1="12" y1="4" x2="6" y2="18" stroke="rgba(245,242,236,0.6)" stroke-width="1" stroke-linecap="square"/>
+            <line x1="12" y1="4" x2="18" y2="18" stroke="rgba(245,242,236,0.6)" stroke-width="1" stroke-linecap="square"/>
+          </svg>
+        </div>
+        <p class="feature-name">Structured Budgeting</p>
+        <p class="feature-desc">Geometric clarity applied to every dollar. Know exactly where your money lives.</p>
+      </div>
+
+      <div class="feature-cell">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <polyline points="2,18 7,10 11,14 16,6 22,9" stroke="#00A878" stroke-width="1" stroke-linecap="square" fill="none"/>
+            <circle cx="22" cy="9" r="1.5" fill="#00A878"/>
+          </svg>
+        </div>
+        <p class="feature-name">Growth Tracking</p>
+        <p class="feature-desc">Watch your net worth move with editorial-grade data visualisations.</p>
+      </div>
+
+      <div class="feature-cell">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" stroke="rgba(245,242,236,0.3)" stroke-width="1" fill="none"/>
+            <line x1="3" y1="9" x2="21" y2="9" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+            <line x1="3" y1="15" x2="21" y2="15" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+            <line x1="9" y1="3" x2="9" y2="21" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+            <line x1="15" y1="3" x2="15" y2="21" stroke="rgba(0,168,120,0.4)" stroke-width="0.75"/>
+            <rect x="9" y="9" width="6" height="6" fill="rgba(0,168,120,0.2)" stroke="#00A878" stroke-width="0.75"/>
+          </svg>
+        </div>
+        <p class="feature-name">Precision Goals</p>
+        <p class="feature-desc">Set savings targets and track progress with mathematical rigour.</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-left">© 2026 Arithmony · All rights reserved</span>
+    <div class="footer-right">
+      <a class="footer-link" href="#">Privacy</a>
+      <a class="footer-link" href="#">Terms</a>
+      <a class="footer-link" href="mailto:hello@arithmony.com">Contact</a>
+    </div>
+  </footer>
+
+</div>
+
+
+<script>
+  // ── SIGNUP COUNT (persisted via localStorage simulation with in-memory store) ──
+  let signupCount = 247; // seed count for social proof
+
+  function updateCounter() {
+    const el = document.getElementById('counterSignups');
+    if (el) el.textContent = signupCount.toLocaleString();
+  }
+
+  // Animate counter on load
+  function animateCounter(target, duration) {
+    const el = document.getElementById('counterSignups');
+    if (!el) return;
+    const start = Math.max(0, target - 60);
+    const startTime = performance.now();
+    function step(now) {
+      const progress = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + (target - start) * eased).toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Validate email
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  }
+
+  // Handle signup
+  function handleSignup() {
+    const input = document.getElementById('emailInput');
+    const btn   = document.getElementById('signupBtn');
+    const error = document.getElementById('formError');
+    const form  = document.getElementById('signupForm');
+    const success = document.getElementById('signupSuccess');
+    const note  = document.getElementById('signupNote');
+
+    const email = input.value.trim();
+
+    // Clear error
+    error.classList.remove('visible');
+
+    if (!isValidEmail(email)) {
+      error.classList.add('visible');
+      input.focus();
+      return;
+    }
+
+    // Loading state
+    btn.textContent = '...';
+    btn.classList.add('loading');
+
+    // Simulate API call
+    setTimeout(() => {
+      // Increment count
+      signupCount += 1;
+
+      // Show success
+      form.style.display = 'none';
+      note.style.display = 'none';
+      success.classList.add('visible');
+
+      // Update counter
+      animateCounter(signupCount, 600);
+    }, 900);
+  }
+
+  // Allow Enter key
+  document.getElementById('emailInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleSignup();
+  });
+
+  // Clear error on type
+  document.getElementById('emailInput').addEventListener('input', function() {
+    document.getElementById('formError').classList.remove('visible');
+  });
+
+  // Init counter with animation (after page loads)
+  window.addEventListener('load', function() {
+    setTimeout(() => animateCounter(signupCount, 1400), 1200);
+  });
+</script>
+
+</body>
+</html>
