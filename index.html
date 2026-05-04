@@ -781,15 +781,15 @@
 
 
 <script>
-  // ── SIGNUP COUNT (persisted via localStorage simulation with in-memory store) ──
-  let signupCount = 247; // seed count for social proof
+  // ── SUPABASE CONFIG ──
+  const SUPABASE_URL = 'https://opfivsjdiqfgcselzwna.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_j-TNvBoYwy-pUVM2--wZbg_U-IcW6iT';
 
-  function updateCounter() {
-    const el = document.getElementById('counterSignups');
-    if (el) el.textContent = signupCount.toLocaleString();
-  }
+  // ── COUNTER (seeded for social proof, real count added on top) ──
+  const SEED_COUNT = 247;
+  let signupCount = SEED_COUNT;
 
-  // Animate counter on load
+  // Animate counter
   function animateCounter(target, duration) {
     const el = document.getElementById('counterSignups');
     if (!el) return;
@@ -804,23 +804,44 @@
     requestAnimationFrame(step);
   }
 
+  // Fetch real signup count from Supabase and add to seed
+  async function fetchSignupCount() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist?select=id`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Prefer': 'count=exact',
+          'Range': '0-0'
+        }
+      });
+      const range = res.headers.get('content-range');
+      if (range) {
+        const total = parseInt(range.split('/')[1], 10);
+        if (!isNaN(total)) signupCount = SEED_COUNT + total;
+      }
+    } catch (e) {
+      // Silently fall back to seed count
+    }
+    animateCounter(signupCount, 1400);
+  }
+
   // Validate email
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }
 
-  // Handle signup
-  function handleSignup() {
-    const input = document.getElementById('emailInput');
-    const btn   = document.getElementById('signupBtn');
-    const error = document.getElementById('formError');
-    const form  = document.getElementById('signupForm');
+  // Handle signup — writes to Supabase waitlist table
+  async function handleSignup() {
+    const input   = document.getElementById('emailInput');
+    const btn     = document.getElementById('signupBtn');
+    const error   = document.getElementById('formError');
+    const form    = document.getElementById('signupForm');
     const success = document.getElementById('signupSuccess');
-    const note  = document.getElementById('signupNote');
+    const note    = document.getElementById('signupNote');
 
     const email = input.value.trim();
 
-    // Clear error
     error.classList.remove('visible');
 
     if (!isValidEmail(email)) {
@@ -833,19 +854,38 @@
     btn.textContent = '...';
     btn.classList.add('loading');
 
-    // Simulate API call
-    setTimeout(() => {
-      // Increment count
-      signupCount += 1;
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ email, source: 'website' })
+      });
 
-      // Show success
+      if (res.status === 409) {
+        // Duplicate email — still show success, no need to alarm the user
+      } else if (!res.ok) {
+        throw new Error('Submission failed');
+      }
+
+      // Success
+      signupCount += 1;
       form.style.display = 'none';
       note.style.display = 'none';
       success.classList.add('visible');
-
-      // Update counter
       animateCounter(signupCount, 600);
-    }, 900);
+
+    } catch (e) {
+      // Reset button and show a generic error
+      btn.textContent = 'Notify Me';
+      btn.classList.remove('loading');
+      error.textContent = 'Something went wrong. Please try again.';
+      error.classList.add('visible');
+    }
   }
 
   // Allow Enter key
@@ -858,9 +898,9 @@
     document.getElementById('formError').classList.remove('visible');
   });
 
-  // Init counter with animation (after page loads)
+  // Init — fetch real count on load
   window.addEventListener('load', function() {
-    setTimeout(() => animateCounter(signupCount, 1400), 1200);
+    setTimeout(fetchSignupCount, 1200);
   });
 </script>
 
