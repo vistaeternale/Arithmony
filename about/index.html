@@ -549,6 +549,50 @@
     .steps-grid { grid-template-columns: 1fr; }
     .hero-meta { gap: 20px; }
   }
+
+  /* ── DARK MODE ── */
+  @media (prefers-color-scheme: dark) {
+    body { background: #0A1020; color: #E8E4DC; }
+
+    /* Light sections become deep navy */
+    .section { border-bottom-color: rgba(0,168,120,0.1); }
+    .section-title { color: #F5F2EC; }
+
+    /* Mission */
+    .mission-body p { color: #C8C4BC; }
+    .mission-body strong { color: #F5F2EC; }
+    .principle-item { border-bottom-color: rgba(0,168,120,0.12); }
+    .principle-item:first-child { border-top-color: rgba(0,168,120,0.12); }
+    .principle-name { color: #F5F2EC; }
+    .principle-desc { color: rgba(245,242,236,0.5); }
+
+    /* Problem section — ivory becomes deep navy tint */
+    .problem-section { background: #0D1528; }
+    .problem-pull { color: #F5F2EC; }
+    .problem-cols { background: rgba(0,168,120,0.08); border-color: rgba(0,168,120,0.08); }
+    .problem-col { background: #0D1528; }
+    .problem-col-head { color: #F5F2EC; }
+    .problem-col p { color: #A09880; }
+
+    /* How it works — white section becomes dark navy */
+    .how-section { background: #0A1020; }
+    .steps-grid { border-color: rgba(0,168,120,0.1); }
+    .step { border-right-color: rgba(0,168,120,0.1); border-bottom-color: rgba(0,168,120,0.1); }
+    .step-number::after { background: rgba(0,168,120,0.1); }
+    .step-name { color: #F5F2EC; }
+    .step-desc { color: rgba(245,242,236,0.45); }
+
+    /* Values section — already navy, stays the same, just ensure no bleed */
+    .values-section { background: #0D1B3E; }
+
+    /* Team section */
+    .team-section { background: #0A1020; }
+    .team-intro { color: #A09880; }
+    .team-grid { background: rgba(0,168,120,0.08); border-color: rgba(0,168,120,0.08); }
+    .team-card { background: #0A1020; }
+    .team-name { color: #F5F2EC; }
+    .team-bio { color: rgba(245,242,236,0.45); }
+  }
 </style>
 </head>
 <body>

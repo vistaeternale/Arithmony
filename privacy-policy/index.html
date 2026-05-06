@@ -169,27 +169,6 @@
     padding: 56px 0 100px 56px;
   }
 
-  /* Disclaimer banner */
-  .legal-notice {
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-left: 3px solid var(--gold);
-    padding: 20px 24px;
-    margin-bottom: 56px;
-    position: relative;
-  }
-  .legal-notice p {
-    font-family: var(--font-sans);
-    font-size: 10px; font-weight: 200;
-    letter-spacing: 0.1em; line-height: 1.7;
-    color: var(--warm-gray);
-  }
-  .legal-notice strong {
-    font-weight: 400; color: var(--navy);
-    letter-spacing: 0.15em; text-transform: uppercase;
-    font-size: 9px;
-  }
-
   /* Section */
   .doc-section {
     margin-bottom: 52px;
@@ -357,6 +336,54 @@
     .doc-body { padding: 40px 0 80px; }
     .nav-links { display: none; }
   }
+
+  /* ── DARK MODE ── */
+  @media (prefers-color-scheme: dark) {
+    body { background: #0A1020; color: #E8E4DC; }
+
+    /* Body text */
+    p { color: #C8C4BC; }
+    ul.doc-list li { color: #C8C4BC; border-bottom-color: rgba(0,168,120,0.12); }
+    li::before { background: #00A878; }
+
+    /* Section headings */
+    .section-heading { color: #F5F2EC; }
+    .section-heading em { color: #00A878; }
+    .section-num { color: #00A878; }
+
+    /* Sidebar TOC */
+    .toc { border-right-color: rgba(0,168,120,0.12); }
+    .toc-label { color: rgba(245,242,236,0.3); }
+    .toc-link { color: rgba(245,242,236,0.4); }
+    .toc-link:hover { color: #F5F2EC; }
+
+    /* Section dividers */
+    .doc-section { border-bottom-color: rgba(0,168,120,0.1); }
+
+    /* Highlight box — navy tinted */
+    .highlight-box {
+      background: rgba(13,27,62,0.6);
+      border-color: rgba(0,168,120,0.15);
+      border-left-color: #00A878;
+    }
+    .highlight-box p { color: #C8C4BC; }
+
+    /* Data table */
+    .data-table th {
+      background: rgba(13,27,62,0.8);
+      color: #F5F2EC;
+      border-bottom-color: rgba(0,168,120,0.2);
+    }
+    .data-table td {
+      color: #C8C4BC;
+      border-bottom-color: rgba(0,168,120,0.08);
+    }
+    .data-table tr:nth-child(even) td { background: rgba(13,27,62,0.3); }
+    .data-table .td-label { color: #F5F2EC; }
+
+    /* strong tags in body */
+    strong { color: #F5F2EC; }
+  }
 </style>
 </head>
 <body>
@@ -432,12 +459,6 @@
 
   <!-- MAIN CONTENT -->
   <div class="doc-body">
-
-    <!-- Disclaimer -->
-    <div class="legal-notice">
-      <p><strong>Note —</strong> This Privacy Policy was drafted as a starting point for Arithmony and reflects the data practices described during setup. It is not a substitute for advice from a qualified attorney. You should have this document reviewed by legal counsel before publishing, particularly given the financial data handled through Plaid.</p>
-    </div>
-
     <!-- 1. Overview -->
     <div class="doc-section" id="overview">
       <span class="section-num">01</span>
