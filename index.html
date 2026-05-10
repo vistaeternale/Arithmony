@@ -798,6 +798,12 @@
   const SUPABASE_URL = 'https://opfivsjdiqfgcselzwna.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_j-TNvBoYwy-pUVM2--wZbg_U-IcW6iT';
 
+  // ── READ UTM PARAMS FROM URL ──
+  // e.g. arithmony.app?source=instagram&ref=someone@email.com
+  const _params       = new URLSearchParams(window.location.search);
+  const SIGNUP_SOURCE = _params.get('source') || 'direct';
+  const REFERRED_BY   = _params.get('ref')    || '';
+
   // ── LIVE COUNTER ──
   const COUNTER_THRESHOLD = 100;
   let signupCount = 0;
@@ -855,12 +861,33 @@
     }
   }
 
+  // ── SEND TO LOOPS ──
+  // Calls our own /api/subscribe endpoint so the Loops key
+  // stays in Vercel environment variables and never hits the browser
+  async function sendToLoops(email, waitlistPosition) {
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          signupSource:     SIGNUP_SOURCE,
+          referredBy:       REFERRED_BY,
+          waitlistPosition: waitlistPosition
+        })
+      });
+    } catch (e) {
+      // Silently fail — Supabase is the source of truth
+    }
+  }
+
   // Validate email
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }
 
-  // Handle signup — writes to Supabase waitlist table
+  // ── HANDLE SIGNUP ──
+  // Writes to Supabase + syncs contact to Loops with full tracking data
   async function handleSignup() {
     const input   = document.getElementById('emailInput');
     const btn     = document.getElementById('signupBtn');
@@ -883,6 +910,9 @@
     btn.textContent = '...';
     btn.classList.add('loading');
 
+    // Waitlist position = current timestamp (lower number = earlier signup)
+    const waitlistPosition = Date.now();
+
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
         method: 'POST',
@@ -892,7 +922,12 @@
           'Content-Type': 'application/json',
           'Prefer': 'return=minimal'
         },
-        body: JSON.stringify({ email, source: 'website' })
+        body: JSON.stringify({
+          email,
+          source:            SIGNUP_SOURCE,
+          referred_by:       REFERRED_BY,
+          waitlist_position: waitlistPosition
+        })
       });
 
       if (res.status === 409) {
@@ -900,6 +935,9 @@
       } else if (!res.ok) {
         throw new Error('Submission failed');
       }
+
+      // Fire Loops in parallel — don't await so it doesn't block the UI
+      sendToLoops(email, waitlistPosition);
 
       // Success — optimistically increment then re-fetch real count
       signupCount += 1;
