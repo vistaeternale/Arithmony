@@ -368,6 +368,100 @@
     color: rgba(245,242,236,0.45);
   }
 
+  /* Referral section */
+  .referral-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 4px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0,168,120,0.15);
+  }
+
+  .referral-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.35);
+  }
+
+  .referral-link-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid rgba(0,168,120,0.2);
+    background: rgba(0,168,120,0.04);
+  }
+
+  .referral-link-text {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: rgba(245,242,236,0.5);
+    padding: 8px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .referral-copy-btn {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(0,168,120,0.2);
+    padding: 8px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .referral-copy-btn:hover { background: rgba(0,168,120,0.08); }
+  .referral-copy-btn.copied { color: rgba(245,242,236,0.4); }
+
+  .referral-share-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .referral-share-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+  }
+
+  .referral-share-link {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.35);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(245,242,236,0.1);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .referral-share-link:hover {
+    color: var(--emerald);
+    border-color: rgba(0,168,120,0.4);
+  }
+
   /* Error message */
   .form-error {
     font-family: var(--font-mono);
@@ -711,6 +805,21 @@
         </div>
         <p class="success-title">You're on the list.</p>
         <p class="success-sub">We'll reach out the moment Arithmony launches.</p>
+
+        <!-- REFERRAL SECTION -->
+        <div class="referral-section">
+          <p class="referral-label">Know someone who'd love this? Share your link.</p>
+          <div class="referral-link-row">
+            <span class="referral-link-text" id="referralLinkText">arithmony.app?ref=...</span>
+            <button class="referral-copy-btn" id="referralCopyBtn" onclick="copyReferralLink()">Copy</button>
+          </div>
+          <div class="referral-share-row">
+            <span class="referral-share-label">Share on</span>
+            <a class="referral-share-link" id="referralTwitter" href="#" target="_blank" rel="noopener">X / Twitter</a>
+            <span class="referral-share-label">·</span>
+            <a class="referral-share-link" id="referralWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
       </div>
       <p class="signup-note" id="signupNote">No spam. One email when we launch. Unsubscribe anytime.</p>
     </div>
@@ -939,6 +1048,9 @@
       // Fire Loops in parallel — don't await so it doesn't block the UI
       sendToLoops(email, waitlistPosition);
 
+      // Populate referral link with the signed-up email
+      populateReferralLink(email);
+
       // Success — optimistically increment then re-fetch real count
       signupCount += 1;
       form.style.display = 'none';
@@ -955,6 +1067,40 @@
       error.textContent = 'Something went wrong. Please try again.';
       error.classList.add('visible');
     }
+  }
+
+  // ── REFERRAL LINK ──
+  function buildReferralLink(email) {
+    return window.location.origin + '?ref=' + encodeURIComponent(email);
+  }
+
+  function populateReferralLink(email) {
+    const link = buildReferralLink(email);
+    const display = 'arithmony.app?ref=' + encodeURIComponent(email);
+    document.getElementById('referralLinkText').textContent = display;
+
+    // X / Twitter share
+    const tweetText = encodeURIComponent("Just joined the @arithmony waitlist — a budgeting app actually worth using. Join me: " + link);
+    document.getElementById('referralTwitter').href = 'https://twitter.com/intent/tweet?text=' + tweetText;
+
+    // WhatsApp share
+    const waText = encodeURIComponent("Just joined the Arithmony waitlist — a budgeting app actually worth using. Join me: " + link);
+    document.getElementById('referralWhatsapp').href = 'https://wa.me/?text=' + waText;
+  }
+
+  function copyReferralLink() {
+    const email = document.getElementById('emailInput').value.trim()
+      || document.getElementById('referralLinkText').textContent.replace('arithmony.app?ref=', '');
+    const link = window.location.origin + '?ref=' + encodeURIComponent(email);
+    navigator.clipboard.writeText(link).then(function() {
+      const btn = document.getElementById('referralCopyBtn');
+      btn.textContent = 'Copied ✦';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2500);
+    });
   }
 
   // Allow Enter key
