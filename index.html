@@ -7,12 +7,16 @@
 <meta name="description" content="A new kind of budgeting app — built with the precision of mathematics and the grace of balance.">
 <meta property="og:title" content="Arithmony — Coming Soon">
 <meta property="og:description" content="A new kind of budgeting app — built with the precision of mathematics and the grace of balance.">
-<meta property="og:url" content="https://arithmony.vercel.app/">
+<meta property="og:url" content="https://arithmony.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Arithmony">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://arithmony.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Arithmony — Coming Soon">
 <meta name="twitter:description" content="A new kind of budgeting app — built with the precision of mathematics and the grace of balance.">
+<meta name="twitter:image" content="https://arithmony.com/og-image.png">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/arithmony-32.png">
 <link rel="apple-touch-icon" href="/arithmony-32.png">
@@ -810,7 +814,7 @@
         <div class="referral-section">
           <p class="referral-label">Know someone who'd love this? Share your link.</p>
           <div class="referral-link-row">
-            <span class="referral-link-text" id="referralLinkText">arithmony.app?ref=...</span>
+            <span class="referral-link-text" id="referralLinkText">arithmony.com?ref=...</span>
             <button class="referral-copy-btn" id="referralCopyBtn" onclick="copyReferralLink()">Copy</button>
           </div>
           <div class="referral-share-row">
@@ -908,7 +912,7 @@
   const SUPABASE_KEY = 'sb_publishable_j-TNvBoYwy-pUVM2--wZbg_U-IcW6iT';
 
   // ── READ UTM PARAMS FROM URL ──
-  // e.g. arithmony.app?source=instagram&ref=someone@email.com
+  // e.g. arithmony.com?source=instagram&ref=someone@email.com
   const _params       = new URLSearchParams(window.location.search);
   const SIGNUP_SOURCE = _params.get('source') || 'direct';
   const REFERRED_BY   = _params.get('ref')    || '';
@@ -1076,7 +1080,7 @@
 
   function populateReferralLink(email) {
     const link = buildReferralLink(email);
-    const display = 'arithmony.app?ref=' + encodeURIComponent(email);
+    const display = 'arithmony.com?ref=' + encodeURIComponent(email);
     document.getElementById('referralLinkText').textContent = display;
 
     // X / Twitter share
@@ -1090,7 +1094,7 @@
 
   function copyReferralLink() {
     const email = document.getElementById('emailInput').value.trim()
-      || document.getElementById('referralLinkText').textContent.replace('arithmony.app?ref=', '');
+      || document.getElementById('referralLinkText').textContent.replace('arithmony.com?ref=', '');
     const link = window.location.origin + '?ref=' + encodeURIComponent(email);
     navigator.clipboard.writeText(link).then(function() {
       const btn = document.getElementById('referralCopyBtn');
